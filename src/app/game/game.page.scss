@@ -1,0 +1,63 @@
+.title {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  color: #FFF;
+  text-align: center;
+  font-family: "lato", sans-serif;
+  font-weight: 300;
+  font-size: 50px;
+  letter-spacing: 10px;
+  margin-top: -60px;
+  padding-left: 10px;
+}
+.title span {
+  background: -webkit-linear-gradient(white, #38495a);
+
+  -webkit-text-fill-color: transparent;
+}
+.open-button {
+  background-color: #555;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  opacity: 0.8;
+  position: fixed;
+  bottom: 20px;
+  right: 28px;
+  width: 240px;
+}
+
+//calendar 
+
+//end of calendar
+
+//report
+.medQ {
+  display: block
+}
+
+.Achievement {
+  display: none
+}
+//end of report
+
+//avatar 
+
+.img {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  opacity: 0.5;
+}
+.button {
+  position: inline-block;
+  top: 5px;
+  left: 0%;
+  right: 0%;
+  text-align: center;
+  padding-bottom: 0px;
+}
+//end of avatar 

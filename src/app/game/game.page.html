@@ -1,0 +1,190 @@
+<header>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+</header>
+
+<ion-content padding class="background">
+  
+  <div class="icon-bar">
+    
+    <!-- <a href="#" class="icon"><i class="far fa-plus-square"></i></a> -->
+    <!-- <a href="#" class="icon"><i class="fas fa-search-minus"></i></a> -->
+    <a (click)= "switchToCalendar()" class="icon"><i class="fas fa-rocket"></i></a> 
+    <a (click)= "switchtoProfile()" class="icon"><i class="fas fa-tshirt"></i></a>
+    <a (click)= "switchToAvatar()" class="icon"><i class="fas fa-user-astronaut"></i></a>
+    <a (click)="switchToReport()" class="icon"><i class="fas fa-notes-medical"></i></a>
+    <a (click)="hideCalendar()" class="iconBottom"><i class="fas fa-cog"></i></a>
+  </div>
+
+
+  <!-- calendar part below -->
+<div id="calendar" style="display: block">
+<ion-button (click)="gotoHome()" >Back to signup</ion-button>
+  <div class='title'>
+    <div>
+      <ion-button id="task" (click)="startTask()">Start Task</ion-button>
+    </div>
+  </div>
+    <div>
+      <ion-button (click)="goToAvatar()">go to avatar page</ion-button>
+    </div>
+  <div style="position: fixed; bottom: 25px; right: 25px;">
+      <ion-button (click)="AddTask()">Add Task</ion-button>
+  </div>
+</div>
+  <!-- end of calendar div -->
+
+  <!-- profile below -->
+<div id="profile" style="display: none">Profile</div>
+<!-- end of profile -->
+
+  <!-- avatar div below -->
+  <div id="avatar" style="display: none">
+      <h1 style="text-align:center;">Choose an Avatar</h1>
+
+      <ion-slides pager="true" style="max-width: 100%; max-height: 100%;">
+    
+        <ion-slide>
+          <ion-card>
+            <ion-card-title>
+              <h1>Astro Chip</h1>
+            </ion-card-title>
+            <ion-img src="assets/Astro1.jpg" class="img"></ion-img>
+          </ion-card>
+        </ion-slide>
+    
+        <ion-slide>
+          <ion-card>
+            <ion-card-title>
+              <h1>Astro Andy</h1>
+            </ion-card-title>
+            <ion-img src="assets/Astro1.jpeg" class="img"></ion-img>
+          </ion-card>
+        </ion-slide>
+    
+        <ion-slide>
+          <ion-card>
+            <ion-card-title>
+              <h1>Astro Ann</h1>
+            </ion-card-title>
+            <ion-img src="assets/girlAstro.jpg" class="img"></ion-img>
+          </ion-card>
+        </ion-slide>
+    
+        <ion-slide>
+          <ion-card>
+            <ion-card-title>
+              <h1>Astro Robo</h1>
+            </ion-card-title>
+            <ion-img src="assets/astro2.jpg" class="img"></ion-img>
+          </ion-card>
+        </ion-slide>
+    
+        <ion-slide>
+          <ion-card>
+            <ion-card-title>
+              <h1>Astro Felix</h1>
+            </ion-card-title>
+            <ion-img src="assets/kidAstro.jpg" class="img"></ion-img>
+          </ion-card>
+        </ion-slide>
+    
+      </ion-slides>
+    
+    
+    <ion-row padding>
+      <ion-col>
+        <ion-button expand="block" (click)="purBtn">Purchase</ion-button>
+      </ion-col>
+    </ion-row>
+  </div>
+<!-- end of avatar div -->
+
+<!-- report div below -->
+<div id="report" style="display: none">
+    <ion-segment [(ngModel)]="relationship" color="primary" (ionChange)="segmentChanged($event)">
+        <ion-segment-button value="MedQ">
+          MedQ
+        </ion-segment-button>
+        <ion-segment-button value="Achievements">
+          Achievements
+        </ion-segment-button>
+      </ion-segment>
+      <!-- <ion-toolbar>
+            <ion-segment>
+              <ion-segment-button  (ionSelect) ="showMedQ()" value="MEDQ" checked> MED Q</ion-segment-button>
+              <ion-segment-button (ionSelect)="showAchievement()" value="Achievments">Achievments</ion-segment-button>
+            </ion-segment>
+      </ion-toolbar> -->
+    <div  class= "medQ" id="QuestionList">
+      <h1>testing stuff</h1>
+    <ion-card>
+      <ion-card-content>Do you struggle with monitoring task completion?</ion-card-content>
+      <ion-button (click)="q1" red="yes">Yes</ion-button>
+      <ion-button red="no">No</ion-button>
+    </ion-card>
+    
+    <ion-card>
+      <ion-card-content>Do you require many reminders to stay on task?</ion-card-content>
+      <ion-button red="yes">Yes</ion-button>
+      <ion-button red="no">No</ion-button>
+    </ion-card>
+    
+    <ion-card>
+      <ion-card-content>Do you have dificulty starting on task?</ion-card-content>
+      <ion-button red="yes">Yes</ion-button>
+      <ion-button red="no">No</ion-button>
+    </ion-card>
+    
+    <ion-card>
+      <ion-card-content>Do you forget to turn in completed work? </ion-card-content>
+        <ion-button red="yes">Yes</ion-button>
+        <ion-button red="no">No</ion-button>
+    </ion-card>
+    
+    <ion-card>
+      <ion-card-content>Do you forget the details of a text while reading or soon after finishing? </ion-card-content>
+      <ion-button red="yes">Yes</ion-button>
+      <ion-button red="no">No</ion-button>
+    </ion-card>
+    
+    <ion-card>
+      <ion-card-content>Struggle with keeping track of needed material?</ion-card-content>
+      <ion-button red="yes">Yes</ion-button>
+      <ion-button red="no">No</ion-button>
+    </ion-card>
+    
+    <ion-card>
+      <ion-card-content>Do you lack proper social skills with peers and adults?</ion-card-content>
+      <ion-button red="yes">Yes</ion-button>
+      <ion-button red="no">No</ion-button>
+    </ion-card>
+    
+    <ion-card>
+      <ion-card-content>Are you easily distracted?</ion-card-content>
+      <ion-button red="yes">Yes</ion-button>
+      <ion-button red="no">No</ion-button>
+    </ion-card>
+    
+    <ion-card>
+      <ion-card-content>Do you seem to struggle making decisions?</ion-card-content>
+      <ion-button red="yes">Yes</ion-button>
+      <ion-button red="no">No</ion-button>
+    </ion-card>
+    
+    <ion-card>
+      <ion-card-content>Do you stuggle to understand that there is more then one way to solve a problem?</ion-card-content>
+      <ion-button red="yes">Yes</ion-button>
+      <ion-button red="no">No</ion-button>
+    </ion-card>
+    </div>
+    
+    
+    <div class="Achievement" id="AchievementList">
+    <ion-card>
+      <ion-card-content>Your Achievments</ion-card-content>
+    </ion-card>
+    </div>
+</div>
+<!-- end of report div -->
+<script src="game.page.ts"></script>
+</ion-content>

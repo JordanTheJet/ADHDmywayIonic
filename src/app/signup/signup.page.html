@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>signup</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+    <ion-item>
+      <ion-input required type="text" placeholder="Email"[(ngModel)]="email"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input required type="password" placeholder="Password"[(ngModel)]="password"></ion-input>
+    </ion-item>
+  </ion-list>
+  <div padding>
+    <ion-button (click)="register()">Register</ion-button>
+    </div>
+</ion-content>

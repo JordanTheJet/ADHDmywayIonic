@@ -75,3 +75,48 @@
   --ion-color-light-shade: #d7d8da;
   --ion-color-light-tint: #f5f6f9;
 }
+
+.background{
+  height: 100%;
+  --ion-background-color: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+  overflow: hidden;
+}
+
+
+    /* Fixed/sticky icon bar (vertically aligned 50% from the top of the screen) */
+
+    .icon-bar {
+      position: fixed;
+      top: 50%;
+      -webkit-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+      transform: translateY(-50%);
+    }
+    
+    /* Style the icon bar links */
+    .icon-bar a {
+      display: block;
+      text-align: center;
+      padding: 10px;
+      transition: all 0.4s ease;
+      color: lightgray;
+      font-size: 25px;
+      }
+      
+      /* Style the social media icons with color, if you want */
+      .icon-bar a:hover {
+      background-color: blue;
+      }
+      
+      .icon{
+        border: dashed white;
+        border-bottom-style:none;
+        
+      }
+      .iconBottom{
+        border: dashed white;
+      }
+      .formButtonFront {
+        padding: 20%;
+        font: size 2;
+       }
