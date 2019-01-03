@@ -27,22 +27,38 @@ myUser.getSession((err, session) => {
 const token = session['idToken']['jwtToken']; //
 session.getIdToken().getJwtToken();
 console.info('post token: ', token);
+
+
 let myHeaders = new HttpHeaders({
   "Content-Type": "application/json",
   "Authorization": token
   });
   console.log('post headers', myHeaders);
 
+  //test Task Calendar
+let DayList = {
+  "Day1": {
+    "Date": "1/3/2019",
+    "Task1": "Homework",
+    "Task2": "Brush Teeth"
+  },
+  "Day2": "1/4/2019"
+}
+
   let postData = {
    
     'Name': 'Jordan Tian',
     'Email': myUser.getUsername(),
-    'Age': 25
+    'Age': 25,
+    'FullTasks': DayList,
+    'Task1': DayList.Day1.Task1
     }
     console.log("myuser: ", myUser.getUsername())
     console.log("postdata: ", postData);
     
-    this.http.post('https://nphtfo2p2j.execute-api.us-east-1.amazonaws.com/12-20Stage/emailapi', JSON.stringify(postData))
+    this.http.post('https://nphtfo2p2j.execute-api.us-east-1.amazonaws.com/12-20Stage/emailapi',
+     JSON.stringify(postData),
+     {headers: myHeaders}) //headers
 .subscribe( response => {
 console.log("post success: ", response);
 }, err => {
@@ -68,21 +84,24 @@ myUser.getSession((err, session) => {
 const token = session['idToken']['jwtToken']; //
 session.getIdToken().getJwtToken();
 console.info('post token: ', token);
-// let myHeaders = new HttpHeaders({
-//   "Content-Type": "application/json",
-//   "Authorization": token
-//   });
-//   console.log('post headers', myHeaders);
+
+
+let myHeaders = new HttpHeaders({
+  "Content-Type": "application/json",
+  "Authorization": token
+  });
+  console.log('post headers', myHeaders);
 let postUserName = {
   "Email": myUser.getUsername()
 }
 
-    this.http.post('https://nphtfo2p2j.execute-api.us-east-1.amazonaws.com/12-20Stage/ADHDGetFromDynamoDB', JSON.stringify(postUserName))
+    this.http.post('https://nphtfo2p2j.execute-api.us-east-1.amazonaws.com/12-20Stage/ADHDGetFromDynamoDB', 
+    JSON.stringify(postUserName))
 .subscribe( response => {
 console.log("get success: ", response);
 this.data = response
     console.log("getdata: ",this.data);
-    console.log("firstitem: ", this.data[0])
+    console.log("firstitem: ", this.data.Item.FullTasks)
 }, err => {
 
 console.log("get error: ", err);

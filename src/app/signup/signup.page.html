@@ -1,19 +1,60 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>signup</ion-title>
+    <ion-title>
+      Sign Up
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
+
 <ion-content padding>
-  <ion-list>
-    <ion-item>
-      <ion-input required type="text" placeholder="Email"[(ngModel)]="email"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-input required type="password" placeholder="Password"[(ngModel)]="password"></ion-input>
-    </ion-item>
-  </ion-list>
-  <div padding>
-    <ion-button (click)="register()">Register</ion-button>
-    </div>
-</ion-content>
+
+    <div>
+        <img src="assets\ADHDmyway_Logo (1).png" alt="">
+      </div>
+<div id="info3" style="display:none">
+        <ion-card>
+        <ion-item >
+          <ion-input required text="text" placeholder="First Name"></ion-input>
+        </ion-item>
+        
+
+        <ion-item>
+          <ion-input required text="text" placeholder="Last Name"></ion-input>
+        </ion-item>
+        </ion-card>
+        <div padding style="text-align:center;">
+            <ion-button (click)="register3()">Sign Up</ion-button>
+            </div>
+      </div> 
+<div id = "info2"style="display:none">
+        <ion-card>
+        <ion-item >
+          <ion-input required text="text" placeholder="Username"></ion-input>
+          </ion-item>
+          
+            <ion-item>
+          <ion-input required text="text" placeholder="Zip Code"></ion-input>
+        </ion-item>
+        </ion-card>
+
+        <div padding style="text-align:center;">
+            <ion-button (click)="register2()">Sign Up</ion-button>
+            </div>
+      </div>
+      <div id="info1"style="display:block">
+      <ion-card>
+      <ion-item >
+        <ion-input required type="text" placeholder="Email"[(ngModel)]="email"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input required type="password" placeholder="Password"[(ngModel)]="password"></ion-input>
+      </ion-item>
+    </ion-card>
+    <div padding style="text-align:center;">
+        <ion-button (click)="register1()">Sign Up</ion-button>
+        </div>
+  </div>
+   
+  </ion-content>

@@ -24,11 +24,16 @@
       <ion-button id="task" (click)="startTask()">Start Task</ion-button>
     </div>
   </div>
-    <div>
-      <ion-button (click)="goToAvatar()">go to avatar page</ion-button>
-    </div>
+    
+  <ion-input required type='text' [(ngModel)]='inputStuff'></ion-input>
+  <ion-button (click)="saveVariable()">Save</ion-button>
+  <ion-button (click)="getVariable()">Get</ion-button>
+  <ion-item>
+    <ion-label>{{showData}}</ion-label>
+  </ion-item>
+
   <div style="position: fixed; bottom: 25px; right: 25px;">
-      <ion-button (click)="AddTask()">Add Task</ion-button>
+      <ion-button (click)="addTask()">Add Task</ion-button>
   </div>
 </div>
   <!-- end of calendar div -->

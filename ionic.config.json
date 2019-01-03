@@ -1,5 +1,7 @@
 {
   "name": "cognitoTestApp",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

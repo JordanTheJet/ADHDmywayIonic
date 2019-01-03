@@ -1,18 +1,87 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router'
 import {CognitoService} from '../cognito.service'
+import {Storage} from '@ionic/storage'
+import { AlertController } from '@ionic/angular';
+
+
+
 @Component({
   selector: 'app-game',
   templateUrl: './game.page.html',
   styleUrls: ['./game.page.scss'],
 })
 export class GamePage implements OnInit {
-
-  constructor(private router: Router, private cognito: CognitoService) { }
+inputStuff: string;
+showData: string;
+  constructor(private router: Router,
+              private cognito: CognitoService,
+              private storage: Storage,
+              public alertController: AlertController) { }
 
   ngOnInit() {
+    
+  }
+  saveVariable(){
+    //myVariable is the key that will let you store and grab your data
+    this.storage.set('myVariable', this.inputStuff).then((success) => {
+      console.log('successfully stored');
+      }, (err) => {
+      console.log(err);
+      });
+  }
+  getVariable() { 
+    // ‘myVariable’ is the key that will let you store and grab your data
+  this.storage.get('myVariable').then((data) => {
+  console.log('myData: ', data);
+  // place the stored data into the showData property
+  this.showData = data;
+  }, (err) => {
+  console.log(err);
+  });
   }
 
+  async addTask(){
+    const alert = await this.alertController.create({
+      header: 'Add Task Name and Date',
+      inputs: [
+        
+        {
+          name: 'name2',
+          type: 'text',
+          id: 'taskName',
+          value: 'homework',
+          placeholder: 'What are you going to do?'
+        },
+        // input date with min & max
+        {
+          name: 'dateInput',
+          type: 'date',
+          id: 'taskDate',
+          min: '2017-03-01',
+          max: '2019-01-12',
+          placeholder: 'When are you going to do it? YYYY-MM-DD'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Cancel');
+          }
+        }, {
+          text: 'Ok',
+          handler: () => {
+            console.log('Confirm Ok');
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
   gotoHome(){
     this.router.navigate(['/home'])
   }
