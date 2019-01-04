@@ -8,7 +8,7 @@
   <ion-grid>
     <ion-row>
     <ion-col size="6" *ngFor="let photo of photoService.photos">
-        <img [src]="photo.data" />
+        <img [src]="photo.data"/>
       </ion-col>
     </ion-row>
   </ion-grid>
@@ -20,7 +20,7 @@
   </ion-fab>
 
   <ion-fab vertical="bottom" horizontal="left" slot="fixed">
-    <ion-fab-button (click)="goHome()">
+    <ion-fab-button (click)="goGame()">
       <ion-icon name="arrow-back"></ion-icon>
     </ion-fab-button>
   </ion-fab>

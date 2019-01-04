@@ -22,5 +22,6 @@ const routes: Routes = [
     RouterModule.forChild(routes)
   ],
   declarations: [GamePage]
+  
 })
 export class GamePageModule {}

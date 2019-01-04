@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { Storage } from '@ionic/storage';
 import { Router } from '@angular/router';
-
+import { HttpClientModule } from '@angular/common/http'; import { HttpModule } from '@angular/http';
 
 @Injectable({
   providedIn: 'root'

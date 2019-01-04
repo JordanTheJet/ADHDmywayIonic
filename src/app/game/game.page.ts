@@ -33,12 +33,13 @@ totalTime: any
     
   }
   async showModal(){ 
+    console.log("function ran")
     const modal = await this.modal.create({
       component: ModalPage
     });
-
+    console.log("before modal present")
     await modal.present(); 
-
+    console.log("after modal present")
   }
   getTime(){
 this.storage.get('taskTime').then((data)=>{
@@ -51,18 +52,6 @@ this.storage.get('taskTime').then((data)=>{
   taskBuilder(){
 
   }
-
-//modal instead of alert
-//   async presentModal() {
-//     const modal = await this.modal.create({
-// component: AddTaskPage,
-// componentProps: {
-//   custom_id:this.value
-// }
-//     })
-// modal.present()
-//   }
-//end of modal
 
   saveVariable(){
     //myVariable is the key that will let you store and grab your data
@@ -82,6 +71,8 @@ this.storage.get('taskTime').then((data)=>{
   console.log(err);
   });
   }
+
+
 
   async addTask(){
     const alert = await this.alertController.create({

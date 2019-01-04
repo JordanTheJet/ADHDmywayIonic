@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PhotoService } from '../photo.service'
 import { Router } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http'; import { HttpModule } from '@angular/http';
 
 
 @Component({
@@ -19,7 +20,7 @@ export class GalleryPage implements OnInit {
     this.photoService.loadSaved();
   }
 
-  goHome(){ 
-    this.router.navigate(['/home'])
+  goGame(){ 
+    this.router.navigate(['/game'])
   }
 }

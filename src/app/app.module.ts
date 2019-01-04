@@ -10,10 +10,10 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { IonicStorageModule} from '@ionic/storage'
-
+import { ModalPage } from './modal/modal.page';
 @NgModule({
-  declarations: [AppComponent],
-  entryComponents: [],
+  declarations: [ModalPage, AppComponent],
+  entryComponents: [ModalPage],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, IonicStorageModule.forRoot()],
   providers: [
     StatusBar,
