@@ -11,6 +11,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { IonicStorageModule} from '@ionic/storage'
 import { ModalPage } from './modal/modal.page';
+import { Camera } from '@ionic-native/camera/ngx';
+
 @NgModule({
   declarations: [ModalPage, AppComponent],
   entryComponents: [ModalPage],
@@ -18,6 +20,7 @@ import { ModalPage } from './modal/modal.page';
   providers: [
     StatusBar,
     SplashScreen,
+    Camera,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
