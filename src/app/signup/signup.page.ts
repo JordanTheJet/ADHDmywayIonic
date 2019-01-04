@@ -12,7 +12,8 @@ import { RestapiService } from '../restapi.service'
 })
 export class SignupPage implements OnInit {
   email: string; 
-  password: string
+  password: string;
+  postData: any;
   constructor(public cognitoService: CognitoService, 
               public alertCtrl: AlertController, 
               public router: Router,
@@ -20,17 +21,29 @@ export class SignupPage implements OnInit {
 
   ngOnInit() {
   }
-  register() { 
-    this.cognitoService.signUp(this.email, this.password).then( 
-      res => { 
-      this.promptVerificationCode(); 
-      }, err => { 
-      // user already exists! (if has same email, etc.) 
-      // create warning here 
-      console.log(err); 
-      } 
-      );
-           
+  register1() { 
+    // this.cognitoService.signUp(this.email, this.password).then( 
+    //   res => { 
+    //   this.promptVerificationCode(); 
+    //   }, err => { 
+    //   // user already exists! (if has same email, etc.) 
+    //   // create warning here 
+    //   console.log(err); 
+    //   } 
+    //   );
+      let info1 = document.getElementById("info1")
+      info1.style.display="none"    
+      let info2 = document.getElementById("info2")
+      info2.style.display="block"
+  }
+  register2(){
+    let info2 = document.getElementById("info2")
+      info2.style.display="none"
+      let info3 = document.getElementById("info3")
+      info3.style.display="block"
+  }
+  register3(){
+    this.router.navigate(['/login'])
   }
   async promptVerificationCode() { 
     let alert = await this.alertCtrl.create({ 

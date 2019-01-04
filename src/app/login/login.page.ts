@@ -12,12 +12,31 @@ import { RestapiService } from '../restapi.service';
 export class LoginPage implements OnInit {
 email: string;
 password: string;
+currentUser: string;
   constructor(public cognito: CognitoService,
               public router: Router,
               public toast: ToastController,
               public api: RestapiService) { }
 
   ngOnInit() {
+    var autoUser= this.cognito.getAuthenticatedUser()
+    console.log(autoUser)
+    if (autoUser != null) {
+      this.router.navigate(['/game'])
+      autoUser.getSession(function(err, session) {
+          if (err) {
+              alert(err);
+              return;
+          }
+          console.log(session)
+          console.log('session validity: ' + session.isValid());
+          let status= session.isValid().toString()
+          console.log(status)
+      });
+    } else {
+      console.log("there was no one signed in")
+    }
+    console.log("autosignin clicked")
   }
   post(){
     this.api.postData()
@@ -31,7 +50,9 @@ password: string;
       console.log(res)
       console.log(res['idToken']['jwtToken'])
       //  res.idToken.jwtToken;
-      // localStorage.setItem("currentUser", this.cognito.getAuthenticatedUser())
+    var currentUser = this.cognito.getAuthenticatedUser()
+    console.log(currentUser)
+      // localStorage.setItem("currentUser", currentUser)
       this.gotoGame() 
     },(err)=>{
       console.log("user not logged in!")
@@ -47,8 +68,7 @@ password: string;
 
   autoSignIn(){
     var autoUser= this.cognito.getAuthenticatedUser()
-    var loginUser= this.router.navigate(['/game'])
-    // console.log(autoUser)
+    console.log(autoUser)
     if (autoUser != null) {
       autoUser.getSession(function(err, session) {
           if (err) {
@@ -59,9 +79,8 @@ password: string;
           console.log('session validity: ' + session.isValid());
           let status= session.isValid().toString()
           console.log(status)
-          console.log("true")
           if(status=="true"){
-            loginUser
+            this.gotoGame();
             console.log("they match")
           }
       });

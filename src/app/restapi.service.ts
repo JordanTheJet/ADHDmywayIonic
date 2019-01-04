@@ -37,21 +37,32 @@ let myHeaders = new HttpHeaders({
 
   //test Task Calendar
 let DayList = {
-  "Day1": {
-    "Date": "1/3/2019",
-    "Task1": "Homework",
-    "Task2": "Brush Teeth"
-  },
-  "Day2": "1/4/2019"
+  // "Day1": {
+  //   "Date": "1/3/2019",
+  //   "Task1": "Homework",
+  //   "Task2": "Brush Teeth"
+  // },
+  // "Day2": {
+  //   "Date": "1/4/2019"
+  // }
+    "Task1": {
+      "Name": "Homework",
+      "Status": "Not Done"
+    },
+    "Task2": {
+      "Name": "Brush Teeth",
+      "Status": "Not Done"
+    }
+  
 }
+// {  "Day1" : { "M" : {      "Date" : { "S" : "1/3/2019" },      "Task1" : { "S" : "Homework" },      "Task2" : { "S" : "Brush Teeth" }    }  },  "Day2" : { "M" : {      "Date" : { "S" : "1/4/2019" }    }  }}
 
   let postData = {
    
     'Name': 'Jordan Tian',
     'Email': myUser.getUsername(),
     'Age': 25,
-    'FullTasks': DayList,
-    'Task1': DayList.Day1.Task1
+    'FullTasks': DayList
     }
     console.log("myuser: ", myUser.getUsername())
     console.log("postdata: ", postData);
@@ -101,13 +112,17 @@ let postUserName = {
 console.log("get success: ", response);
 this.data = response
     console.log("getdata: ",this.data);
-    console.log("firstitem: ", this.data.Item.FullTasks)
+    console.log("firstitem: ", this.data.Item.Age.N) // gets task list
 }, err => {
 
 console.log("get error: ", err);
 });
 });
   }
+
+getUserData(){
+  return this.data
+}
 }
 
 

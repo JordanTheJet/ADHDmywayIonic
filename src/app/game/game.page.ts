@@ -3,7 +3,10 @@ import {Router} from '@angular/router'
 import {CognitoService} from '../cognito.service'
 import {Storage} from '@ionic/storage'
 import { AlertController } from '@ionic/angular';
-
+import { ModalController } from '@ionic/angular';
+import { RestapiService } from '../restapi.service'
+import { AddTaskPage } from '../add-task/add-task.page';
+import { ModalPage} from '../modal/modal.page';
 
 
 @Component({
@@ -14,14 +17,53 @@ import { AlertController } from '@ionic/angular';
 export class GamePage implements OnInit {
 inputStuff: string;
 showData: string;
+userData: any;
+value = 0;
+FullTasks= {}
+totalTime: any
   constructor(private router: Router,
               private cognito: CognitoService,
               private storage: Storage,
-              public alertController: AlertController) { }
+              public alertController: AlertController,
+              private restapi: RestapiService,
+              private modal: ModalController) { }
 
   ngOnInit() {
+    this.userData = this.restapi.getData()
     
   }
+  async showModal(){ 
+    const modal = await this.modal.create({
+      component: ModalPage
+    });
+
+    await modal.present(); 
+
+  }
+  getTime(){
+this.storage.get('taskTime').then((data)=>{
+  console.log('taskTime ', data);
+  this.totalTime=data;
+}, (err)=>{
+  console.log(err)
+})
+}
+  taskBuilder(){
+
+  }
+
+//modal instead of alert
+//   async presentModal() {
+//     const modal = await this.modal.create({
+// component: AddTaskPage,
+// componentProps: {
+//   custom_id:this.value
+// }
+//     })
+// modal.present()
+//   }
+//end of modal
+
   saveVariable(){
     //myVariable is the key that will let you store and grab your data
     this.storage.set('myVariable', this.inputStuff).then((success) => {
@@ -45,23 +87,24 @@ showData: string;
     const alert = await this.alertController.create({
       header: 'Add Task Name and Date',
       inputs: [
-        
+        //input name of the task
         {
-          name: 'name2',
+          name: 'taskName',
           type: 'text',
           id: 'taskName',
           value: 'homework',
           placeholder: 'What are you going to do?'
         },
         // input date with min & max
-        {
-          name: 'dateInput',
-          type: 'date',
-          id: 'taskDate',
-          min: '2017-03-01',
-          max: '2019-01-12',
-          placeholder: 'When are you going to do it? YYYY-MM-DD'
-        }
+        // {
+        //   name: 'taskDate',
+        //   type: 'date',
+        //   id: 'taskDate',
+        //   min: '2019-01-01',
+        //   max: '2020-01-01',
+        //   value: "myDate",
+        //   placeholder: 'When are you going to do it? YYYY-MM-DD'
+        // }
       ],
       buttons: [
         {
@@ -73,13 +116,14 @@ showData: string;
           }
         }, {
           text: 'Ok',
-          handler: () => {
+          handler: (data) => {
+            
+            console.log(data)
             console.log('Confirm Ok');
           }
         }
       ]
     });
-
     await alert.present();
   }
   gotoHome(){

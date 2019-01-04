@@ -7,6 +7,9 @@ const routes: Routes = [
   { path: 'signup', loadChildren: './signup/signup.module#SignupPageModule' },
   { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
   { path: 'game', loadChildren: './game/game.module#GamePageModule' },
+  { path: 'AddTask', loadChildren: './add-task/add-task.module#AddTaskPageModule' },
+  { path: 'modal', loadChildren: './modal/modal.module#ModalPageModule' },
+  { path: 'gallery', loadChildren: './gallery/gallery.module#GalleryPageModule' },
 ];
 
 @NgModule({
