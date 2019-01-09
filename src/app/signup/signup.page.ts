@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {CognitoService} from '../cognito.service'
-import { AlertController } from '@ionic/angular'; 
+import { AlertController, ToastController } from '@ionic/angular'; 
 import { Router } from '@angular/router';
 import { RestapiService } from '../restapi.service'
 
@@ -11,35 +11,51 @@ import { RestapiService } from '../restapi.service'
   styleUrls: ['./signup.page.scss'],
 })
 export class SignupPage implements OnInit {
-  userName: string;
-  zipCode: number;
-  firstName: string;
-  lastName: string;
   email: string; 
   password: string;
-  userData = {
-    "Email": "",
-    "FirstName": "",
-    "LastName": "",
-    "ZipCode": 0,
-    "UserName": "",
-    "myPoints": 0,
-    "FullTasks": {},
-    "MedicalQ": {},
-    "currentTaskNum": 0
-  }
-  constructor(public cognito: CognitoService, 
+  postData: any;
+  constructor(public cognitoService: CognitoService, 
               public alertCtrl: AlertController, 
               public router: Router,
-              public api: RestapiService) { }
+              public api: RestapiService,
+              public toastCtrl: ToastController) { }
 
   ngOnInit() {
   }
   register1() { 
+    this.cognitoService.signUp(this.email, this.password).then( 
+      res => { 
+      this.promptVerificationCode(); 
       let info1 = document.getElementById("info1")
       info1.style.display="none"    
       let info2 = document.getElementById("info2")
       info2.style.display="block"
+      }, err => { 
+        if(err.code=="UsernameExistsException"){
+          this.promptVerificationCode();
+        }else if(err.code=="InvalidPasswordException"){
+          this.signupErrToast()
+        }
+
+      // user already exists! (if has same email, etc.) 
+      // create warning here 
+      //put toast here
+      
+      console.log(err); 
+      } 
+      );
+     
+  }
+  async signupErrToast(){
+    const signUpToast = await this.toastCtrl.create({
+      message: "Password needs at least 8 letters and a symbol.", 
+      duration: 2000,
+      position: "middle", 
+      color: "secondary",
+     
+    }); 
+    signUpToast.present(); 
+
   }
   register2(){
     let info2 = document.getElementById("info2")
@@ -48,35 +64,9 @@ export class SignupPage implements OnInit {
       info3.style.display="block"
   }
   register3(){
-    this.userData.Email=this.email;
-    this.userData.UserName=this.userName;
-    this.userData.ZipCode=this.zipCode;
-    this.userData.FirstName=this.firstName;
-    this.userData.LastName=this.lastName;
-    this.taskBuilder()
-    console.log(this.userData)
-      this.cognito.signUp(this.email, this.password).then( 
-      res => { 
-      this.promptVerificationCode(); 
-      }, err => { 
-      // user already exists! (if has same email, etc.) 
-      // create warning here 
-      console.log(err); 
-      } 
-      );
     
+    this.router.navigate(['/login'])
   }
-
-  taskBuilder(){
-    let currentTaskName= "task0"
-    
-    let dummyTask = {
-      "taskName": "finish the app",
-      "status": "not done"
-    }
-    this.userData.FullTasks[currentTaskName]=dummyTask
-  }
-  
   async promptVerificationCode() { 
     let alert = await this.alertCtrl.create({ 
       message: "Enter Verfication Code", 
@@ -90,6 +80,10 @@ export class SignupPage implements OnInit {
       text: "Cancel", 
       role: "cancel", 
       handler: data => { // when the user presses Cancel 
+      let info1 = document.getElementById("info1")
+      info1.style.display="block"    
+      let info2 = document.getElementById("info2")
+      info2.style.display="none"
       console.log("Cancel clicked"); 
       } 
       }, { 
@@ -104,7 +98,7 @@ export class SignupPage implements OnInit {
       
   }
   verifyUser(verificationCode) { 
-    this.cognito.confirmUser(verificationCode, this.email).then( 
+    this.cognitoService.confirmUser(verificationCode, this.email).then( 
       res => { 
       console.log(res); // prints SUCCESS 
       // on success present a new alert that says they are 
@@ -112,6 +106,10 @@ export class SignupPage implements OnInit {
       // then redirect to "home" page on dismiss of this alert 
       this.successAlert(); 
       }, err => { 
+        let info1 = document.getElementById("info1")
+      info1.style.display="block"    
+      let info2 = document.getElementById("info2")
+      info2.style.display="none"
       alert(err.message); 
       } 
       ); 
@@ -124,25 +122,9 @@ export class SignupPage implements OnInit {
       buttons: ["Sweet!"] 
       }); 
       alert.onDidDismiss().then( () => { 
-        this.cognito.authenticate(this.email, this.password).then((res) =>{
-          console.log("user logged in!")
-          console.log(res)
-          console.log(res['idToken']['jwtToken'])
-          //  res.idToken.jwtToken;
-        var currentUser = this.cognito.getAuthenticatedUser()
-        console.log(currentUser)
-          // localStorage.setItem("currentUser", currentUser)
-        },(err)=>{
-          console.log("user not logged in! Somethings really wrong")
-          console.log(err)
-        })
-
-      this.api.postData(this.userData)
-      // navigate to home
-      this.router.navigate(['/home'])
-      
+      // navigate to home page 
+      // this.router.navigate(['/home']); 
       }); 
       await alert.present();       
   }
-  
 }

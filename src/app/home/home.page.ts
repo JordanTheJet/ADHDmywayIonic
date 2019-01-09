@@ -7,16 +7,10 @@ import {CognitoService} from '../cognito.service'
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
-  email: string;
-  password: string;
-  currentUser: string;
   constructor(private router: Router, private cognito: CognitoService){
   }
   ngOnInit(){
 
-  }
-  goToLogin(){
-    this.router.navigate(['/login'])
   }
   goToGame(){
     this.router.navigate(['/game'])
@@ -24,11 +18,9 @@ export class HomePage implements OnInit {
   goToSignup() {
     this.router.navigate(['/signup'])
   }
-  // goToLogin() {
-  //   this.router.navigate(['/login'])
-  // }
-
-
+  goToLogin() {
+    this.router.navigate(['/login'])
+  }
   logOut(){
     const currentUser = this.cognito.getAuthenticatedUser()
     if (currentUser != null) { // means that the currentUser constant has data in it
@@ -40,8 +32,6 @@ export class HomePage implements OnInit {
       console.log('no current user to logout');
       }
   }
-
-
   autoSignIn(){
     
     var loginUser= this.router.navigate(['/game'])
@@ -67,24 +57,5 @@ export class HomePage implements OnInit {
       console.log("there was no one signed in")
     }
     console.log("autosignin clicked")
-  }
-  login(){
-    this.cognito.authenticate(this.email, this.password).then((res) =>{
-      console.log("user logged in!")
-      console.log(res)
-      console.log(res['idToken']['jwtToken'])
-      //  res.idToken.jwtToken;
-    var currentUser = this.cognito.getAuthenticatedUser()
-    console.log(currentUser)
-      // localStorage.setItem("currentUser", currentUser)
-      this.gotoGame() 
-    },(err)=>{
-      console.log("user not logged in!")
-      console.log(err)
-    })
-  }
-    
-  gotoGame(){
-    this.router.navigate(['/game'])
   }
 }

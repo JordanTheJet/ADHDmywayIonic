@@ -16,14 +16,13 @@ currentUser: string;
   constructor(public cognito: CognitoService,
               public router: Router,
               public toast: ToastController,
-              public api: RestapiService,
-             ) { }
+              public api: RestapiService) { }
 
   ngOnInit() {
     var autoUser= this.cognito.getAuthenticatedUser()
     console.log(autoUser)
     if (autoUser != null) {
-      this.gotoGame();
+      this.router.navigate(['/game'])
       autoUser.getSession(function(err, session) {
           if (err) {
               alert(err);
@@ -33,12 +32,17 @@ currentUser: string;
           console.log('session validity: ' + session.isValid());
           let status= session.isValid().toString()
           console.log(status)
-         
       });
     } else {
       console.log("there was no one signed in")
     }
-
+    console.log("autosignin clicked")
+  }
+  post(){
+    this.api.postData()
+  }
+  get(){
+    this.api.getData()
   }
   login(){
     this.cognito.authenticate(this.email, this.password).then((res) =>{
@@ -56,9 +60,7 @@ currentUser: string;
     })
   }
 
-  goToSignup() {
-    this.router.navigate(['/signup'])
-  }
+  
   gotoGame(){
     this.router.navigate(['/game'])
   }
@@ -68,7 +70,6 @@ currentUser: string;
     var autoUser= this.cognito.getAuthenticatedUser()
     console.log(autoUser)
     if (autoUser != null) {
-      this.gotoGame();
       autoUser.getSession(function(err, session) {
           if (err) {
               alert(err);
@@ -78,7 +79,10 @@ currentUser: string;
           console.log('session validity: ' + session.isValid());
           let status= session.isValid().toString()
           console.log(status)
-         
+          if(status=="true"){
+            this.gotoGame();
+            console.log("they match")
+          }
       });
     } else {
       console.log("there was no one signed in")

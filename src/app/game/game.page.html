@@ -21,9 +21,10 @@
 
   <!-- calendar part below -->
 <div id="calendar" style="display: block">
+<ion-button (click)="gotoHome()" >Back to home</ion-button>
   <div class='title'>
     <div>
-      <ion-button id="task" (click)="startTask()">Start Task</ion-button>
+      <ion-button id="task" (click)="showModal()">Start Task</ion-button>
       <ion-button (click)="getTime()">Show Time</ion-button>
     </div>
   </div>

@@ -51,6 +51,7 @@ export class ModalPage implements OnInit {
   }
 
   go(){
+   
     this.saveTime()
     clearInterval(this.myVar)
     this.modalCtrl.dismiss(); 
