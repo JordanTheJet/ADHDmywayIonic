@@ -218,14 +218,40 @@ export class GamePage implements OnInit {
     });
   }
 
-  startTask(){
+  async startTask(){
+
     let currentTaskName= `task${this.userData.currentTaskNum}`
     console.log(currentTaskName)
     console.log(this.userData)
+    console.log("object that we are working on", this.userData.currentTaskNum)
+    console.log("how many objects total", Object.keys(this.userData.FullTasks).length)
+    if(this.userData.currentTaskNum==Object.keys(this.userData.FullTasks).length){
+      let alert = await this.alertController.create({
+        header: "Congratulations!",
+       
+        subHeader: "You are done with all of your tasks!",
+        buttons: ['Dismiss']
+      });
+      await alert.present();
+    }
+    if(this.userData.FullTasks[currentTaskName].status == "not done"){
     this.userData.FullTasks[currentTaskName].status = "doing"
     console.log(this.userData.FullTasks)
     this.restapi.postData(this.userData)
     this.showModal()
+    }
+    else if(this.userData.FullTasks[currentTaskName].status == "doing"){
+      this.userData.FullTasks[currentTaskName].status = "done"
+      this.userData.currentTaskNum++
+    }else{
+      let alert = await this.alertController.create({
+        header: "Congratulations!",
+       
+        subHeader: "You are done with all of your tasks!",
+        buttons: ['Dismiss']
+      });
+      await alert.present();
+    }
   }
   async addTask() {
     const alert = await this.alertController.create({

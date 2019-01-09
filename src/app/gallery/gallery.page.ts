@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http'; import { HttpModule } from '@angular/http';
 import { TrackerService } from '../tracker.service'
 import { DatatrackerService } from '../datatracker.service';
+// import { DatatrackerService } from '../datatracker.service';
 
 @Component({
   selector: 'app-gallery',
@@ -16,7 +17,7 @@ export class GalleryPage implements OnInit {
 
   constructor(public photoService: PhotoService,
               private router: Router,
-              private datatracker: DatatrackerService
+              private datatracker:DatatrackerService
               ) { }
 
   ngOnInit() {
@@ -24,7 +25,7 @@ export class GalleryPage implements OnInit {
   }
 
   goGame(){ 
-    this.datatracker.loadData
+    // this.datatracker.loadData()
     this.router.navigate(['/game'])
   }
 }

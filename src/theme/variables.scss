@@ -87,17 +87,16 @@
 
     .icon-bar {
       position: fixed;
-      top: 50%;
-      -webkit-transform: translateY(-50%);
-      -ms-transform: translateY(-50%);
-      transform: translateY(-50%);
+      bottom: 5%;
+      display: inline;
+    
     }
     
     /* Style the icon bar links */
     .icon-bar a {
-      display: block;
+      position: sticky;
       text-align: center;
-      padding: 10px;
+      padding: 20px;
       transition: all 0.4s ease;
       color: lightgray;
       font-size: 25px;
