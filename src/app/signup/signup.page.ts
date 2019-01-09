@@ -11,10 +11,24 @@ import { RestapiService } from '../restapi.service'
   styleUrls: ['./signup.page.scss'],
 })
 export class SignupPage implements OnInit {
+  userName: string;
+  zipCode: number;
+  firstName: string;
+  lastName: string;
   email: string; 
   password: string;
-  postData: any;
-  constructor(public cognitoService: CognitoService, 
+  userData = {
+    "Email": "",
+    "FirstName": "",
+    "LastName": "",
+    "ZipCode": 0,
+    "UserName": "",
+    "myPoints": 0,
+    "FullTasks": {},
+    "MedicalQ": {},
+    "currentTaskNum": 0
+  }
+  constructor(public cognito: CognitoService, 
               public alertCtrl: AlertController, 
               public router: Router,
               public api: RestapiService) { }
@@ -22,15 +36,6 @@ export class SignupPage implements OnInit {
   ngOnInit() {
   }
   register1() { 
-    // this.cognitoService.signUp(this.email, this.password).then( 
-    //   res => { 
-    //   this.promptVerificationCode(); 
-    //   }, err => { 
-    //   // user already exists! (if has same email, etc.) 
-    //   // create warning here 
-    //   console.log(err); 
-    //   } 
-    //   );
       let info1 = document.getElementById("info1")
       info1.style.display="none"    
       let info2 = document.getElementById("info2")
@@ -43,8 +48,35 @@ export class SignupPage implements OnInit {
       info3.style.display="block"
   }
   register3(){
-    this.router.navigate(['/login'])
+    this.userData.Email=this.email;
+    this.userData.UserName=this.userName;
+    this.userData.ZipCode=this.zipCode;
+    this.userData.FirstName=this.firstName;
+    this.userData.LastName=this.lastName;
+    this.taskBuilder()
+    console.log(this.userData)
+      this.cognito.signUp(this.email, this.password).then( 
+      res => { 
+      this.promptVerificationCode(); 
+      }, err => { 
+      // user already exists! (if has same email, etc.) 
+      // create warning here 
+      console.log(err); 
+      } 
+      );
+    
   }
+
+  taskBuilder(){
+    let currentTaskName= "task0"
+    
+    let dummyTask = {
+      "taskName": "finish the app",
+      "status": "not done"
+    }
+    this.userData.FullTasks[currentTaskName]=dummyTask
+  }
+  
   async promptVerificationCode() { 
     let alert = await this.alertCtrl.create({ 
       message: "Enter Verfication Code", 
@@ -72,7 +104,7 @@ export class SignupPage implements OnInit {
       
   }
   verifyUser(verificationCode) { 
-    this.cognitoService.confirmUser(verificationCode, this.email).then( 
+    this.cognito.confirmUser(verificationCode, this.email).then( 
       res => { 
       console.log(res); // prints SUCCESS 
       // on success present a new alert that says they are 
@@ -92,9 +124,25 @@ export class SignupPage implements OnInit {
       buttons: ["Sweet!"] 
       }); 
       alert.onDidDismiss().then( () => { 
-      // navigate to home page 
-      this.router.navigate(['/home']); 
+        this.cognito.authenticate(this.email, this.password).then((res) =>{
+          console.log("user logged in!")
+          console.log(res)
+          console.log(res['idToken']['jwtToken'])
+          //  res.idToken.jwtToken;
+        var currentUser = this.cognito.getAuthenticatedUser()
+        console.log(currentUser)
+          // localStorage.setItem("currentUser", currentUser)
+        },(err)=>{
+          console.log("user not logged in! Somethings really wrong")
+          console.log(err)
+        })
+
+      this.api.postData(this.userData)
+      // navigate to home
+      this.router.navigate(['/home'])
+      
       }); 
       await alert.present();       
   }
+  
 }

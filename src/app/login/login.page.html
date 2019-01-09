@@ -16,12 +16,11 @@
       <ion-input required type="password" placeholder="Password"[(ngModel)]="password"></ion-input>
     </ion-item>
   </ion-list>
-  <div padding>
-    <ion-button (click)="login()">Login</ion-button>
-    </div>
-    <div>
+  <ion-button expand="full" (click)="login()">Login</ion-button>
+  <ion-button expand="full" (click)="goToSignup()">Sign Up</ion-button>
+    <!-- <div>
       <ion-button (click)="autoSignIn()">Use previous credentials</ion-button>
-    </div>
-    <ion-button (click)="post()">Use the post function!</ion-button>
-    <ion-button (click)="get()">Use the get funciton!</ion-button>
+    </div> -->
+    <!-- <ion-button (click)="post()">Use the post function!</ion-button>
+    <ion-button (click)="get()">Use the get funciton!</ion-button> -->
 </ion-content>

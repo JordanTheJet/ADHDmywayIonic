@@ -78,7 +78,7 @@
 
 .background{
   height: 100%;
-  --ion-background-color: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+  --ion-background-color: radial-gradient(ellipse at bottom, #5a80ac 0%, #090a0f 100%);
   overflow: hidden;
 }
 
@@ -110,10 +110,10 @@
       
       .icon{
         border: dashed white;
-        border-bottom-style:none;
+        border-right-style:none;
         
       }
-      .iconBottom{
+      .iconRight{
         border: dashed white;
       }
       .formButtonFront {
