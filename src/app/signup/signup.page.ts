@@ -11,9 +11,24 @@ import { RestapiService } from '../restapi.service'
   styleUrls: ['./signup.page.scss'],
 })
 export class SignupPage implements OnInit {
+  userName: string;
+  zipCode: number;
+  firstName: string;
+  lastName: string;
   email: string; 
   password: string;
   postData: any;
+  userData = {
+    "Email": "",
+    "FirstName": "",
+    "LastName": "",
+    "ZipCode": 0,
+    "UserName": "",
+    "myPoints": 0,
+    "FullTasks": {},
+    "MedicalQ": {},
+    "currentTaskNum": 0
+  }
   constructor(public cognitoService: CognitoService, 
               public alertCtrl: AlertController, 
               public router: Router,
@@ -64,8 +79,25 @@ export class SignupPage implements OnInit {
       info3.style.display="block"
   }
   register3(){
-    
+    this.userData.Email=this.email;
+    this.userData.UserName=this.userName;
+    this.userData.ZipCode=this.zipCode;
+    this.userData.FirstName=this.firstName;
+    this.userData.LastName=this.lastName;
+    this.taskBuilder()
+
+    this.api.postData(this.userData)
     this.router.navigate(['/login'])
+  }
+
+  taskBuilder(){
+    let currentTaskName= "task0"
+    
+    let dummyTask = {
+      "taskName": "finish the app",
+      "status": "not done"
+    }
+    this.userData.FullTasks[currentTaskName]=dummyTask
   }
   async promptVerificationCode() { 
     let alert = await this.alertCtrl.create({ 

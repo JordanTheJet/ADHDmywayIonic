@@ -38,9 +38,7 @@ currentUser: string;
     }
     console.log("autosignin clicked")
   }
-  post(){
-    this.api.postData()
-  }
+  
   get(){
     this.api.getData()
   }
@@ -55,6 +53,7 @@ currentUser: string;
       // localStorage.setItem("currentUser", currentUser)
       this.gotoGame() 
     },(err)=>{
+      this.loginErrToast()
       console.log("user not logged in!")
       console.log(err)
     })
@@ -64,8 +63,16 @@ currentUser: string;
   gotoGame(){
     this.router.navigate(['/game'])
   }
+  async loginErrToast(){
+    const loginToast = await this.toast.create({
+      message: "Whoops! Your username or password is incorrect. Please try again.", 
+      duration: 2000,
+      position: "middle", 
+      color: "secondary",
 
-
+    }); 
+    loginToast.present(); 
+  }
   autoSignIn(){
     var autoUser= this.cognito.getAuthenticatedUser()
     console.log(autoUser)

@@ -7,7 +7,8 @@ import {CognitoService} from '../cognito.service'
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
-  constructor(private router: Router, private cognito: CognitoService){
+  constructor(private router: Router,
+              private cognito: CognitoService,){
   }
   ngOnInit(){
 

@@ -17,7 +17,6 @@ import { ModalPage} from '../modal/modal.page';
 export class GamePage implements OnInit {
 inputStuff: string;
 showData: string;
-userData: any;
 value = 0;
 FullTasks= {}
 totalTime: any
@@ -29,8 +28,8 @@ totalTime: any
               private modal: ModalController) { }
 
   ngOnInit() {
-    this.userData = this.restapi.getData()
-    console.log(this.userData)
+    this.restapi.getData()
+    console.log(this.restapi.userData)
   }
   async showModal(){ 
     console.log("function ran")
@@ -74,12 +73,12 @@ this.storage.get('taskTime').then((data)=>{
 
   async startTask(){
 
-    let currentTaskName= `task${this.userData.currentTaskNum}`
+    let currentTaskName= `task${this.restapi.userData.currentTaskNum}`
     console.log(currentTaskName)
-    console.log(this.userData)
-    console.log("object that we are working on", this.userData.currentTaskNum)
-    console.log("how many objects total", Object.keys(this.userData.FullTasks).length)
-    if(this.userData.currentTaskNum==Object.keys(this.userData.FullTasks).length){
+    console.log(this.restapi.userData)
+    console.log("object that we are working on", this.restapi.userData.currentTaskNum)
+    console.log("how many objects total", Object.keys(this.restapi.userData.FullTasks).length)
+    if(this.restapi.userData.currentTaskNum==Object.keys(this.restapi.userData.FullTasks).length){
       let alert = await this.alertController.create({
         header: "Congratulations!",
        
@@ -88,24 +87,26 @@ this.storage.get('taskTime').then((data)=>{
       });
       await alert.present();
     }
-    if(this.userData.FullTasks[currentTaskName].status == "not done"){
-    this.userData.FullTasks[currentTaskName].status = "doing"
-    console.log(this.userData.FullTasks)
-    this.restapi.postData()
-    this.showModal()
+    if(this.restapi.userData.FullTasks[currentTaskName].status == "not done"){
+    this.restapi.userData.FullTasks[currentTaskName].status = "doing"
+    console.log(this.restapi.userData.FullTasks)
+    this.restapi.postData(this.restapi.userData)
+    // this.showModal()
     }
-    else if(this.userData.FullTasks[currentTaskName].status == "doing"){
-      this.userData.FullTasks[currentTaskName].status = "done"
-      this.userData.currentTaskNum++
+    else if(this.restapi.userData.FullTasks[currentTaskName].status == "doing"){
+      this.restapi.userData.FullTasks[currentTaskName].status = "done"
+      this.restapi.userData.currentTaskNum++
+      console.log(this.restapi.userData.currentTaskNum)
     }else{
       let alert = await this.alertController.create({
-        header: "Congratulations!",
+        header: "Uhoh",
        
-        subHeader: "You are done with all of your tasks!",
+        subHeader: "Something went wrong",
         buttons: ['Dismiss']
       });
       await alert.present();
     }
+
   }
   async addTask() {
     const alert = await this.alertController.create({
@@ -141,9 +142,16 @@ this.storage.get('taskTime').then((data)=>{
         }, {
           text: 'Ok',
           handler: (data) => {
-            
-            console.log(data)
+            data.status="not done"
+          let taskName=`task${Object.keys(this.restapi.userData.FullTasks).length}`
+          console.log(taskName)
+          this.restapi.userData.FullTasks[taskName]=data
+          console.log(this.restapi.userData)
+          console.log('Confirm Ok');
+          this.restapi.postData(this.restapi.userData)
+            console.log(data);
             console.log('Confirm Ok');
+            
           }
         }
       ]

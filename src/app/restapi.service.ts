@@ -7,10 +7,22 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class RestapiService {
 data: any
+// autoUser = this.cognitoService.getAuthenticatedUser().getUsername()
+userData = {
+  "Email": "",
+  "FirstName": "",
+  "LastName": "",
+  "ZipCode": 0,
+  "UserName": "",
+  "myPoints": 0,
+  "FullTasks": {},
+  "MedicalQ": {},
+  "currentTaskNum": 0
+}
   constructor( private cognitoService: CognitoService,
                private http: HttpClient ) { }
 
-  postData() {
+  postData(userData) {
     let myUser = this.cognitoService.getAuthenticatedUser();
 if (myUser === null) { // if there’s no data, leave function
 console.log("user is null");
@@ -57,18 +69,18 @@ let DayList = {
 }
 // {  "Day1" : { "M" : {      "Date" : { "S" : "1/3/2019" },      "Task1" : { "S" : "Homework" },      "Task2" : { "S" : "Brush Teeth" }    }  },  "Day2" : { "M" : {      "Date" : { "S" : "1/4/2019" }    }  }}
 
-  let postData = {
+  // let postData = {
    
-    'Name': 'Jordan Tian',
-    'Email': myUser.getUsername(),
-    'Age': 25,
-    'FullTasks': DayList
-    }
+  //   'Name': 'Jordan Tian',
+  //   'Email': myUser.getUsername(),
+  //   'Age': 25,
+  //   'FullTasks': DayList
+  //   }
     console.log("myuser: ", myUser.getUsername())
-    console.log("postdata: ", postData);
+    console.log("postdata: ", userData);
     
     this.http.post('https://nphtfo2p2j.execute-api.us-east-1.amazonaws.com/12-20Stage/emailapi',
-     JSON.stringify(postData),
+     JSON.stringify(userData),
      {headers: myHeaders}) //headers
 .subscribe( response => {
 console.log("post success: ", response);
@@ -112,7 +124,48 @@ let postUserName = {
 console.log("get success: ", response);
 this.data = response
     console.log("getdata: ",this.data);
-     // gets task list
+    this.userData.Email = this.data.Item.Email.S
+    this.userData.FirstName = this.data.Item.FirstName.S
+      console.log(this.userData)
+      console.log(this.userData.FirstName)
+
+      this.userData.LastName = this.data.Item.LastName.S
+      console.log(this.data.Item.LastName.S)
+
+      console.log(this.data.Item.ZipCode.S)
+      console.log(this.data.Item.ZipCode)
+      this.userData.ZipCode = this.data.Item.ZipCode.S
+      console.log("posted", this.userData.ZipCode)
+
+      this.userData.UserName = this.data.Item.UserName.S
+      console.log(this.userData.UserName)
+
+      this.userData.myPoints = parseInt(this.data.Item.myPoints.N)
+      console.log(this.userData.myPoints)
+
+      this.userData.currentTaskNum = this.data.Item.currentTaskNum.N
+      console.log(this.userData.currentTaskNum)
+      
+      let numObjects=Object.keys(this.data.Item.FullTasks.M).length
+      console.log(numObjects)
+      let numOfTasks = 0
+      
+      
+      while(numOfTasks<numObjects){
+        let taskID= `task${numOfTasks}`
+        console.log(numObjects)
+        
+        let taskObject = {
+          taskName: this.data.Item.FullTasks.M[taskID].M.taskName.S,
+          status: this.data.Item.FullTasks.M[taskID].M.status.S
+        }
+        this.userData.FullTasks[taskID]=taskObject
+        console.log(this.userData.FullTasks)
+        numOfTasks++
+      }
+      console.log(this.userData)
+
+
 }, err => {
 
 console.log("get error: ", err);
