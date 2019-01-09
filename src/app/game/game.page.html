@@ -4,11 +4,11 @@
 
 <ion-content padding class="background">
   
+
+  <ion-label>{{myPoints}}</ion-label>
   <!-- <ion-button (click)="getStuff()">get stuff</ion-button> -->
-  
 <!-- <ion-button (click)="gotoHome()" >Back to home</ion-button> -->
   <div class="icon-bar">
-    
     <!-- <a href="#" class="icon"><i class="far fa-plus-square"></i></a> -->
     <!-- <a href="#" class="icon"><i class="fas fa-search-minus"></i></a> -->
     <a (click)= "switchToCalendar()" class="icon"><i class="fas fa-rocket"></i></a> 
@@ -34,7 +34,7 @@
     <ion-label>{{showData}}</ion-label>
   </ion-item> -->
 
-  <div style="position: fixed; bottom: 25px; right: 25px;">
+  <div style="position: fixed; bottom: 95px; right: 15px;">
       <ion-button (click)="addTask()">Add Task</ion-button>
   </div>
 </div>
