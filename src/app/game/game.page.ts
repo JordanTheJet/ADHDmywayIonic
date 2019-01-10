@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {Router} from '@angular/router'
 import {CognitoService} from '../cognito.service'
 import {Storage} from '@ionic/storage'
-import { AlertController, ToastController } from '@ionic/angular';
+import { AlertController, ToastController, Slides, Slide} from '@ionic/angular';
 import { ModalController } from '@ionic/angular';
 import { RestapiService } from '../restapi.service'
 import { AddTaskPage } from '../add-task/add-task.page';
@@ -15,7 +15,14 @@ import { ModalPage} from '../modal/modal.page';
   styleUrls: ['./game.page.scss'],
 })
 export class GamePage implements OnInit {
-
+  @ViewChild(Slides) slides: Slides;
+  slideOpts = {
+    slidesPerView: 1.0,
+    spaceBetween: 10,
+    centeredSlides: true,
+    pagination: true
+    
+  };
 inputStuff: string;
 showData = 'string';
 value = 0;
@@ -100,7 +107,8 @@ this.storage.get('taskTime').then((data)=>{
         buttons: ['Dismiss']
       });
       await alert.present();
-    }
+      return
+    } else{
     if(this.restapi.userData.FullTasks[currentTaskName].status == "not done"){
     this.restapi.userData.FullTasks[currentTaskName].status = "doing"
     console.log(this.restapi.userData.FullTasks)
@@ -109,7 +117,8 @@ this.storage.get('taskTime').then((data)=>{
     }
     else if(this.restapi.userData.FullTasks[currentTaskName].status == "doing"){
       this.restapi.userData.FullTasks[currentTaskName].status = "done"
-      this.restapi.userData.currentTaskNum++
+      this.restapi.userData.myPoints+= 200;
+      this.restapi.userData.currentTaskNum++;
       this.restapi.updateTask()
       console.log(this.restapi.userData.currentTaskNum)
 
@@ -123,7 +132,7 @@ this.storage.get('taskTime').then((data)=>{
       });
       await alert.present();
     }
-
+  }
   }
   async addTask() {
     const alert = await this.alertController.create({
@@ -174,6 +183,31 @@ this.storage.get('taskTime').then((data)=>{
       ]
     });
     await alert.present();
+  }
+
+  slideChanged(){
+    let currentIndex = this.slides.getActiveIndex().then(data => {
+      console.log(data);
+      });;
+    console.log('Current index is', currentIndex);
+    console.log(typeof currentIndex)
+    console.log(currentIndex.catch)
+    console.log(currentIndex.finally)
+      console.log(currentIndex.then)
+      
+  }
+  avatarSelect(){
+    let avatarNum= this.slides.getActiveIndex()
+    console.log(avatarNum)
+  }
+  purBtn(){
+    console.log(typeof this.slides)
+    console.log(this.slides)
+    let currentIndex = this.slides.getActiveIndex();
+    // this.slides.lockSwipeToNext(true) 
+    // makes it so that you cant swipe right
+    this.slides.slideNext()
+    console.log('Current index is', currentIndex);
   }
   gotoHome(){
     this.router.navigate(['/home'])
@@ -243,11 +277,12 @@ let calendar = document.getElementById("calendar")
 calendar.style.display= "block"
 }
 switchToProfile(){
-this.hideAvatar()
-this.hideCalendar()
-this.hideReport()
-let profile = document.getElementById("profile")
-profile.style.display="block"
+  this.router.navigate(['/gallery'])
+// this.hideAvatar()
+// this.hideCalendar()
+// this.hideReport()
+// let profile = document.getElementById("profile")
+// profile.style.display="block"
 }
 switchToAvatar(){
 this.hideProfile()

@@ -145,10 +145,23 @@ this.data = response
 
       this.userData.myPoints = parseInt(this.data.Item.myPoints.N)
       console.log(this.userData.myPoints)
+      
+      console.log(typeof this.data.Item.currentTaskNum.S)
+      console.log(typeof this.data.Item.currentTaskNum.N)
 
-      this.userData.currentTaskNum = this.data.Item.currentTaskNum.N
+      if(typeof this.data.Item.currentTaskNum.S=="undefined"){
+      this.userData.currentTaskNum = parseInt(this.data.Item.currentTaskNum.N)
       console.log(this.userData.currentTaskNum)
-
+      console.log(typeof this.userData.currentTaskNum)
+      console.log(typeof this.data.Item.currentTaskNum.N)
+      }else if(typeof this.data.Item.currentTaskNum.N=="undefined"){
+        this.userData.currentTaskNum = parseInt(this.data.Item.currentTaskNum.S)
+        console.log(this.userData.currentTaskNum)
+        console.log(typeof this.userData.currentTaskNum)
+        console.log(typeof this.data.Item.currentTaskNum.S)
+      }else{
+        console.log("the type of currentTaskNum is something else")
+      }
       let numObjects=Object.keys(this.data.Item.FullTasks.M).length
       console.log(numObjects)
       let numOfTasks = 0
@@ -167,7 +180,14 @@ this.data = response
         numOfTasks++
       }
       console.log(this.userData)
-      this.updateTask()
+      let holder = `task${this.userData.currentTaskNum}`
+      console.log(holder)
+      if(this.userData.currentTaskNum == Object.keys(this.userData.FullTasks).length){
+        return
+      }else{
+      this.taskID=this.userData.FullTasks[holder].taskName
+      console.log(this.taskID)
+      }
       // this.saveData()
 }, err => {
 
@@ -179,8 +199,12 @@ console.log("get error: ", err);
 updateTask(){
   let holder = `task${this.userData.currentTaskNum}`
       console.log(holder)
+      if(this.userData.currentTaskNum == Object.keys(this.userData.FullTasks).length){
+        return
+      }else{ 
       this.taskID=this.userData.FullTasks[holder].taskName
       console.log(this.taskID)
+      }
 }
   saveData(){
     //myVariable is the key that will let you store and grab your data

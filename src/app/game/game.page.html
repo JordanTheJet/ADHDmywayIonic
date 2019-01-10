@@ -13,7 +13,7 @@
     <!-- <a href="#" class="icon"><i class="far fa-plus-square"></i></a> -->
     <!-- <a href="#" class="icon"><i class="fas fa-search-minus"></i></a> -->
     <a (click)= "switchToCalendar()" class="icon"><i class="fas fa-rocket"></i></a> 
-    <a (click)= "switchtoProfile()" class="icon"><i class="fas fa-tshirt"></i></a>
+    <a (click)= "switchToProfile()" class="icon"><i class="fas fa-tshirt"></i></a>
     <a (click)= "switchToAvatar()" class="icon"><i class="fas fa-user-astronaut"></i></a>
     <a (click)="switchToReport()" class="iconRight"><i class="fas fa-notes-medical"></i></a>
     <!-- <a (click)="hideCalendar()" class="iconRight"><i class="fas fa-cog"></i></a> -->
@@ -54,7 +54,7 @@
   <div id="avatar" style="display: none">
       <h1 style="text-align:center;">Choose an Avatar</h1>
 
-      <ion-slides pager="true" style="max-width: 100%; max-height: 100%;">
+      <ion-slides (ionSlideDidChange)="slideChanged()" pager="true"scrollbar="true" [options]="slideOpts" style="max-width: 100%; max-height: 100%; --ion-background-color: white">
     
         <ion-slide>
           <ion-card>
@@ -106,7 +106,7 @@
     
     <ion-row padding>
       <ion-col>
-        <ion-button expand="block" (click)="purBtn">Purchase</ion-button>
+        <ion-button expand="block" (click)="purBtn()">Purchase</ion-button>
       </ion-col>
     </ion-row>
   </div>

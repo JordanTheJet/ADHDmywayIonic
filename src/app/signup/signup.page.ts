@@ -24,7 +24,7 @@ export class SignupPage implements OnInit {
     "LastName": "",
     "ZipCode": 0,
     "UserName": "",
-    "myPoints": 0,
+    "myPoints": 1000,
     "FullTasks": {},
     "MedicalQ": {},
     "currentTaskNum": 0
