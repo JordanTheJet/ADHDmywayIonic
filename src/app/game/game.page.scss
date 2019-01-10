@@ -43,7 +43,8 @@
 
 //report
 .medQ {
-  display: block
+  display: block;
+  color:white;
 }
 
 .Achievement {
@@ -52,7 +53,9 @@
 //end of report
 
 //avatar 
-
+.avatarLabel{
+  color:white;
+}
 .img {
   position: relative;
   width: 300px;

@@ -21,8 +21,8 @@ export class GamePage implements OnInit {
     spaceBetween: 10,
     centeredSlides: true,
     pagination: true
-    
   };
+currentIndex: number;
 inputStuff: string;
 showData = 'string';
 value = 0;
@@ -136,7 +136,7 @@ this.storage.get('taskTime').then((data)=>{
   }
   async addTask() {
     const alert = await this.alertController.create({
-      header: 'Add Task Name and Date',
+      header: 'Add Task Name',
       inputs: [
         //input name of the task
         {
@@ -186,15 +186,12 @@ this.storage.get('taskTime').then((data)=>{
   }
 
   slideChanged(){
-    let currentIndex = this.slides.getActiveIndex().then(data => {
-      console.log(data);
+    this.slides.getActiveIndex().then(data => {
+      console.log(data)
+      this.currentIndex=data;
+      console.log('Current index is', this.currentIndex);
+    console.log(typeof this.currentIndex)
       });;
-    console.log('Current index is', currentIndex);
-    console.log(typeof currentIndex)
-    console.log(currentIndex.catch)
-    console.log(currentIndex.finally)
-      console.log(currentIndex.then)
-      
   }
   avatarSelect(){
     let avatarNum= this.slides.getActiveIndex()
@@ -203,11 +200,15 @@ this.storage.get('taskTime').then((data)=>{
   purBtn(){
     console.log(typeof this.slides)
     console.log(this.slides)
-    let currentIndex = this.slides.getActiveIndex();
+    if(this.currentIndex<3){
+    this.restapi.userData.myPoints= this.restapi.userData.myPoints-1000
+    }else{
+      this.restapi.userData.myPoints= this.restapi.userData.myPoints-500
+    }
     // this.slides.lockSwipeToNext(true) 
     // makes it so that you cant swipe right
-    this.slides.slideNext()
-    console.log('Current index is', currentIndex);
+    // this.slides.slideNext()
+    this.restapi.postData(this.restapi.userData)
   }
   gotoHome(){
     this.router.navigate(['/home'])

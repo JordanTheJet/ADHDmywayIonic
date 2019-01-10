@@ -16,7 +16,7 @@ userData = {
   "LastName": "",
   "ZipCode": 0,
   "UserName": "",
-  "myPoints": 0,
+  "myPoints": 2000,
   "FullTasks": {},
   "MedicalQ": {},
   "currentTaskNum": 0

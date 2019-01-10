@@ -94,7 +94,7 @@ export class SignupPage implements OnInit {
     let currentTaskName= "task0"
     
     let dummyTask = {
-      "taskName": "finish the app",
+      "taskName": "Take A Selfie!",
       "status": "not done"
     }
     this.userData.FullTasks[currentTaskName]=dummyTask

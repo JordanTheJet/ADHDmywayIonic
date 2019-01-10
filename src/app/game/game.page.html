@@ -52,14 +52,14 @@
 
   <!-- avatar div below -->
   <div id="avatar" style="display: none">
-      <h1 style="text-align:center;">Choose an Avatar</h1>
+      <h1 style="text-align:center;"class="avatarLabel">Choose an Avatar</h1>
 
       <ion-slides (ionSlideDidChange)="slideChanged()" pager="true"scrollbar="true" [options]="slideOpts" style="max-width: 100%; max-height: 100%; --ion-background-color: white">
     
         <ion-slide>
           <ion-card>
             <ion-card-title>
-              <h1>Astro Chip</h1>
+              <h1 class="avatarLabel">Astro Chip 1000</h1>
             </ion-card-title>
             <ion-img src="assets/Astro1.jpg" class="img"></ion-img>
           </ion-card>
@@ -68,7 +68,7 @@
         <ion-slide>
           <ion-card>
             <ion-card-title>
-              <h1>Astro Andy</h1>
+              <h1 class="avatarLabel">Astro Andy 1000</h1>
             </ion-card-title>
             <ion-img src="assets/Astro1.jpeg" class="img"></ion-img>
           </ion-card>
@@ -77,7 +77,7 @@
         <ion-slide>
           <ion-card>
             <ion-card-title>
-              <h1>Astro Ann</h1>
+              <h1 class="avatarLabel">Astro Ann 1000</h1>
             </ion-card-title>
             <ion-img src="assets/girlAstro.jpg" class="img"></ion-img>
           </ion-card>
@@ -86,7 +86,7 @@
         <ion-slide>
           <ion-card>
             <ion-card-title>
-              <h1>Astro Robo</h1>
+              <h1 class="avatarLabel">Astro Robo 500</h1>
             </ion-card-title>
             <ion-img src="assets/astro2.jpg" class="img"></ion-img>
           </ion-card>
@@ -95,7 +95,7 @@
         <ion-slide>
           <ion-card>
             <ion-card-title>
-              <h1>Astro Felix</h1>
+              <h1 class="avatarLabel">Astro Felix 500</h1>
             </ion-card-title>
             <ion-img src="assets/kidAstro.jpg" class="img"></ion-img>
           </ion-card>
@@ -115,10 +115,10 @@
 <!-- report div below -->
 <div id="report" style="display: none">
     <ion-segment [(ngModel)]="relationship" color="primary" (ionChange)="segmentChanged($event)">
-        <ion-segment-button value="MedQ">
+        <ion-segment-button class="avatarLabel" value="MedQ">
           MedQ
         </ion-segment-button>
-        <ion-segment-button value="Achievements">
+        <ion-segment-button class="avatarLabel" value="Achievements">
           Achievements
         </ion-segment-button>
       </ion-segment>
@@ -129,63 +129,63 @@
             </ion-segment>
       </ion-toolbar> -->
     <div  class= "medQ" id="QuestionList">
-      <h1>testing stuff</h1>
+      <!-- <h1>testing stuff</h1> -->
     <ion-card>
-      <ion-card-content>Do you struggle with monitoring task completion?</ion-card-content>
+      <ion-card-content class="avatarLabel">Do you struggle with monitoring task completion?</ion-card-content>
       <ion-button (click)="q1" red="yes">Yes</ion-button>
       <ion-button red="no">No</ion-button>
     </ion-card>
     
     <ion-card>
-      <ion-card-content>Do you require many reminders to stay on task?</ion-card-content>
+      <ion-card-content class="avatarLabel">Do you require many reminders to stay on task?</ion-card-content>
       <ion-button red="yes">Yes</ion-button>
       <ion-button red="no">No</ion-button>
     </ion-card>
     
     <ion-card>
-      <ion-card-content>Do you have dificulty starting on task?</ion-card-content>
+      <ion-card-content class="avatarLabel">Do you have dificulty starting on task?</ion-card-content>
       <ion-button red="yes">Yes</ion-button>
       <ion-button red="no">No</ion-button>
     </ion-card>
     
     <ion-card>
-      <ion-card-content>Do you forget to turn in completed work? </ion-card-content>
+      <ion-card-content class="avatarLabel">Do you forget to turn in completed work? </ion-card-content>
         <ion-button red="yes">Yes</ion-button>
         <ion-button red="no">No</ion-button>
     </ion-card>
     
     <ion-card>
-      <ion-card-content>Do you forget the details of a text while reading or soon after finishing? </ion-card-content>
+      <ion-card-content class="avatarLabel">Do you forget the details of a text while reading or soon after finishing? </ion-card-content>
       <ion-button red="yes">Yes</ion-button>
       <ion-button red="no">No</ion-button>
     </ion-card>
     
     <ion-card>
-      <ion-card-content>Struggle with keeping track of needed material?</ion-card-content>
+      <ion-card-content class="avatarLabel">Struggle with keeping track of needed material?</ion-card-content>
       <ion-button red="yes">Yes</ion-button>
       <ion-button red="no">No</ion-button>
     </ion-card>
     
     <ion-card>
-      <ion-card-content>Do you lack proper social skills with peers and adults?</ion-card-content>
+      <ion-card-content class="avatarLabel">Do you lack proper social skills with peers and adults?</ion-card-content>
       <ion-button red="yes">Yes</ion-button>
       <ion-button red="no">No</ion-button>
     </ion-card>
     
     <ion-card>
-      <ion-card-content>Are you easily distracted?</ion-card-content>
+      <ion-card-content class="avatarLabel">Are you easily distracted?</ion-card-content>
       <ion-button red="yes">Yes</ion-button>
       <ion-button red="no">No</ion-button>
     </ion-card>
     
     <ion-card>
-      <ion-card-content>Do you seem to struggle making decisions?</ion-card-content>
+      <ion-card-content class="avatarLabel">Do you seem to struggle making decisions?</ion-card-content>
       <ion-button red="yes">Yes</ion-button>
       <ion-button red="no">No</ion-button>
     </ion-card>
     
     <ion-card>
-      <ion-card-content>Do you stuggle to understand that there is more then one way to solve a problem?</ion-card-content>
+      <ion-card-content class="avatarLabel">Do you stuggle to understand that there is more then one way to solve a problem?</ion-card-content>
       <ion-button red="yes">Yes</ion-button>
       <ion-button red="no">No</ion-button>
     </ion-card>
@@ -194,7 +194,7 @@
     
     <div class="Achievement" id="AchievementList">
     <ion-card>
-      <ion-card-content>Your Achievments</ion-card-content>
+      <ion-card-content class="avatarLabel">Your Achievments</ion-card-content>
     </ion-card>
     </div>
 </div>
