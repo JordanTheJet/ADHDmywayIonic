@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CognitoService } from '../app/cognito.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Storage } from '@ionic/storage';
 
 @Injectable({
   providedIn: 'root'
@@ -8,6 +9,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class RestapiService {
 data: any
 // autoUser = this.cognitoService.getAuthenticatedUser().getUsername()
+taskID: string;
 userData = {
   "Email": "",
   "FirstName": "",
@@ -20,7 +22,8 @@ userData = {
   "currentTaskNum": 0
 }
   constructor( private cognitoService: CognitoService,
-               private http: HttpClient ) { }
+               private http: HttpClient,
+               private storage: Storage) { }
 
   postData(userData) {
     let myUser = this.cognitoService.getAuthenticatedUser();
@@ -145,7 +148,7 @@ this.data = response
 
       this.userData.currentTaskNum = this.data.Item.currentTaskNum.N
       console.log(this.userData.currentTaskNum)
-      
+
       let numObjects=Object.keys(this.data.Item.FullTasks.M).length
       console.log(numObjects)
       let numOfTasks = 0
@@ -164,15 +167,25 @@ this.data = response
         numOfTasks++
       }
       console.log(this.userData)
-
-
+      let holder = `task${this.userData.currentTaskNum}`
+      console.log(holder)
+      this.taskID=this.userData.FullTasks[holder].taskName
+      console.log(this.taskID)
+      // this.saveData()
 }, err => {
 
 console.log("get error: ", err);
 });
 });
   }
-
+  saveData(){
+    //myVariable is the key that will let you store and grab your data
+    this.storage.set('userData', this.userData).then((success) => {
+      console.log('successfully stored');
+      }, (err) => {
+      console.log(err);
+      });
+  }
 getUserData(){
   return this.data
 }

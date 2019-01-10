@@ -1,6 +1,6 @@
 .title {
   position: absolute;
-  top: 50%;
+  top: 25%;
   left: 0;
   right: 0;
   color: #FFF;
@@ -29,7 +29,16 @@
   right: 28px;
   width: 240px;
 }
-
+.planets{
+  position: fixed;
+  width: 20px;
+  height: 20px;
+}
+.container{
+  position: relative;
+  text-align: center;
+  color:white;
+}
 //calendar 
 
 //end of calendar

@@ -3,9 +3,10 @@
 </header>
 
 <ion-content padding class="background">
-  
-
-  <ion-label>{{myPoints}}</ion-label>
+  <ion-item>
+    <ion-badge slot="end"> MyPoints: {{this.restapi.userData.myPoints}}</ion-badge>
+  </ion-item>
+  <!-- <ion-label>{{myPoints}}</ion-label> -->
   <!-- <ion-button (click)="getStuff()">get stuff</ion-button> -->
 <!-- <ion-button (click)="gotoHome()" >Back to home</ion-button> -->
   <div class="icon-bar">
@@ -17,15 +18,18 @@
     <a (click)="switchToReport()" class="iconRight"><i class="fas fa-notes-medical"></i></a>
     <!-- <a (click)="hideCalendar()" class="iconRight"><i class="fas fa-cog"></i></a> -->
   </div>
-
-
   <!-- calendar part below -->
 <div id="calendar" style="display: block">
-<ion-button (click)="gotoHome()" >Back to home</ion-button>
+<!-- <ion-button (click)="gotoHome()" >Back to home</ion-button> -->
   <div class='title'>
-    <div>
-      <ion-button id="task" (click)="startTask()">Start Task</ion-button>
-      <ion-button (click)="getTime()">Show Time</ion-button>
+    <div class="container">
+      <h1>{{this.restapi.taskID}}</h1>
+      <div id="taskLabel"></div>
+     
+      <ion-img (click)="startTask()" class= ".planets" src="assets/planet1.png"> </ion-img>
+      <!-- put label of object on top of here -->
+      <!-- <ion-button id="task" (click)="startTask()">Start Task</ion-button> -->
+      <!-- <ion-button (click)="getTime()">Show Time</ion-button> -->
     </div>
   </div>
   <!-- <ion-input required type='text' [(ngModel)]='inputStuff'></ion-input>
@@ -36,7 +40,8 @@
   </ion-item> -->
 
   <div style="position: fixed; bottom: 95px; right: 15px;">
-      <ion-button (click)="addTask()">Add Task</ion-button>
+      <ion-img (click)="addTask()" style="position: fixed; bottom:75px; right:1px" src= "assets/coolSun.png" class= "coolSun"></ion-img> 
+    <!-- <ion-button (click)="addTask()">Add Task</ion-button> -->
   </div>
 </div>
   <!-- end of calendar div -->

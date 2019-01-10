@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router'
 import {CognitoService} from '../cognito.service'
 import {Storage} from '@ionic/storage'
-import { AlertController } from '@ionic/angular';
+import { AlertController, ToastController } from '@ionic/angular';
 import { ModalController } from '@ionic/angular';
 import { RestapiService } from '../restapi.service'
 import { AddTaskPage } from '../add-task/add-task.page';
@@ -15,8 +15,9 @@ import { ModalPage} from '../modal/modal.page';
   styleUrls: ['./game.page.scss'],
 })
 export class GamePage implements OnInit {
+
 inputStuff: string;
-showData: string;
+showData = 'string';
 value = 0;
 FullTasks= {}
 totalTime: any
@@ -25,11 +26,33 @@ totalTime: any
               private storage: Storage,
               public alertController: AlertController,
               private restapi: RestapiService,
-              private modal: ModalController) { }
+              private modal: ModalController,
+              private toastCtrl: ToastController) { }
 
   ngOnInit() {
-    this.restapi.getData()
-    console.log(this.restapi.userData)
+    
+    // this.getVariable()
+    // let taskNum = `task${this.restapi.userData.currentTaskNum}`
+    // this.showData=this.restapi.userData.FullTasks[taskNum].taskName
+    // console.log(this.showData)
+    // console.log(typeof this.showData)
+
+    // let taskLabel = document.getElementById("taskLabel")
+    // let label = document.createElement("ion-label")
+    // label.innerHTML = `${this.showData}`
+    // taskLabel.appendChild(label)
+  }
+
+  getVariable() { 
+    // ‘myVariable’ is the key that will let you store and grab your data
+  this.storage.get('userData').then((data) => {
+  console.log('myData: ', data);
+  // place the stored data into the showData property
+  this.showData = data;
+  console.log(this.showData)
+  }, (err) => {
+  console.log(err);
+  });
   }
   async showModal(){ 
     console.log("function ran")
@@ -60,16 +83,7 @@ this.storage.get('taskTime').then((data)=>{
       console.log(err);
       });
   }
-  getVariable() { 
-    // ‘myVariable’ is the key that will let you store and grab your data
-  this.storage.get('myVariable').then((data) => {
-  console.log('myData: ', data);
-  // place the stored data into the showData property
-  this.showData = data;
-  }, (err) => {
-  console.log(err);
-  });
-  }
+ 
 
   async startTask(){
 
@@ -91,12 +105,14 @@ this.storage.get('taskTime').then((data)=>{
     this.restapi.userData.FullTasks[currentTaskName].status = "doing"
     console.log(this.restapi.userData.FullTasks)
     this.restapi.postData(this.restapi.userData)
-    // this.showModal()
+    this.showModal()
     }
     else if(this.restapi.userData.FullTasks[currentTaskName].status == "doing"){
       this.restapi.userData.FullTasks[currentTaskName].status = "done"
       this.restapi.userData.currentTaskNum++
       console.log(this.restapi.userData.currentTaskNum)
+
+      //show the next task
     }else{
       let alert = await this.alertController.create({
         header: "Uhoh",
@@ -162,7 +178,45 @@ this.storage.get('taskTime').then((data)=>{
     this.router.navigate(['/home'])
   }
   
-  get(){}
+  savePoints(){
+    this.storage.set('points', this.restapi.userData.myPoints).then((success)=>{
+      console.log('sucessfully stored'); 
+    }, (err)=>{
+      console.log(err); 
+    });
+  } 
+ 
+  getPoints(){
+    this.storage.get('points').then((data)=>{
+      console.log('myData:', data)
+      this.restapi.userData.myPoints = data; 
+    }, (err)=> {
+      console.log(err); 
+    }); 
+  }
+ 
+   async pointToast(){
+     const ptToast = await this.toastCtrl.create({
+       message: "You did it! +300", 
+       duration: 2000,
+       position: "middle", 
+       color: "danger"
+       
+ 
+     }); 
+     ptToast.onDidDismiss().then(()=> {
+       this.addpoints(); 
+       this.savePoints();
+       this.getPoints();
+     })
+ 
+     ptToast.present();   
+   }
+ 
+   addpoints(){
+    this.restapi.userData.myPoints += 300;
+   
+   }
 
 hideCalendar(){
   let calendar = document.getElementById("calendar")

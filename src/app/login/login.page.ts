@@ -22,7 +22,11 @@ currentUser: string;
     var autoUser= this.cognito.getAuthenticatedUser()
     console.log(autoUser)
     if (autoUser != null) {
-      this.router.navigate(['/game'])
+      this.api.getData()
+      setTimeout(() => {
+        this.router.navigate(['/game'])
+      }, 1000);
+      
       autoUser.getSession(function(err, session) {
           if (err) {
               alert(err);
@@ -39,9 +43,7 @@ currentUser: string;
     console.log("autosignin clicked")
   }
   
-  get(){
-    this.api.getData()
-  }
+ 
   login(){
     this.cognito.authenticate(this.email, this.password).then((res) =>{
       console.log("user logged in!")
@@ -51,7 +53,11 @@ currentUser: string;
     var currentUser = this.cognito.getAuthenticatedUser()
     console.log(currentUser)
       // localStorage.setItem("currentUser", currentUser)
-      this.gotoGame() 
+      this.api.getData()
+    console.log(this.api.userData)
+    setTimeout(() => {
+      this.router.navigate(['/game'])
+    }, 1000);
     },(err)=>{
       this.loginErrToast()
       console.log("user not logged in!")
@@ -60,9 +66,7 @@ currentUser: string;
   }
 
   
-  gotoGame(){
-    this.router.navigate(['/game'])
-  }
+ 
   async loginErrToast(){
     const loginToast = await this.toast.create({
       message: "Whoops! Your username or password is incorrect. Please try again.", 
@@ -77,6 +81,11 @@ currentUser: string;
     var autoUser= this.cognito.getAuthenticatedUser()
     console.log(autoUser)
     if (autoUser != null) {
+      this.api.getData()
+           console.log(this.api.userData)
+           setTimeout(() => {
+            this.router.navigate(['/game'])
+          }, 1000);
       autoUser.getSession(function(err, session) {
           if (err) {
               alert(err);
@@ -86,10 +95,12 @@ currentUser: string;
           console.log('session validity: ' + session.isValid());
           let status= session.isValid().toString()
           console.log(status)
-          if(status=="true"){
-            this.gotoGame();
-            console.log("they match")
-          }
+          
+          this.api.getData()
+           console.log(this.api.userData)
+          this.gotoGame();
+            
+          
       });
     } else {
       console.log("there was no one signed in")
