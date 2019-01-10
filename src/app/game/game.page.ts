@@ -110,6 +110,7 @@ this.storage.get('taskTime').then((data)=>{
     else if(this.restapi.userData.FullTasks[currentTaskName].status == "doing"){
       this.restapi.userData.FullTasks[currentTaskName].status = "done"
       this.restapi.userData.currentTaskNum++
+      this.restapi.updateTask()
       console.log(this.restapi.userData.currentTaskNum)
 
       //show the next task

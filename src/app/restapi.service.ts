@@ -167,10 +167,7 @@ this.data = response
         numOfTasks++
       }
       console.log(this.userData)
-      let holder = `task${this.userData.currentTaskNum}`
-      console.log(holder)
-      this.taskID=this.userData.FullTasks[holder].taskName
-      console.log(this.taskID)
+      this.updateTask()
       // this.saveData()
 }, err => {
 
@@ -178,6 +175,13 @@ console.log("get error: ", err);
 });
 });
   }
+
+updateTask(){
+  let holder = `task${this.userData.currentTaskNum}`
+      console.log(holder)
+      this.taskID=this.userData.FullTasks[holder].taskName
+      console.log(this.taskID)
+}
   saveData(){
     //myVariable is the key that will let you store and grab your data
     this.storage.set('userData', this.userData).then((success) => {
