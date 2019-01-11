@@ -1,19 +1,28 @@
-<ion-header>
+<!-- <ion-header>
   <ion-toolbar>
     <ion-title>Start Your Mission</ion-title>
   </ion-toolbar>
-</ion-header>
+</ion-header> -->
 
 <ion-content padding>
+    <ion-card>
+        <ion-card-content>
+            <h1 >Go do {{this.restapi.taskID}}!</h1>
+        </ion-card-content>
+</ion-card>
+
 
 
     <Div class="container" id="watchDiv">
-        <h1><p id="output"><b > 0:0:0 </b></p></h1>
-
-        <ion-buttons id="controls">
-             <ion-button id="goBTN" (click)= "stopwatchfunc()"> <b>Start Mission!</b> </ion-button> 
-             <ion-button (click)="go()"> <b> Mission Complete! </b> </ion-button>
-        </ion-buttons>
+        <h1><p id="output"style="bottom:60%;"><b > 0:0:0:0 </b></p></h1>
+        <br>
+        <br>
+        <br>
+        <br>
+        <!-- <ion-buttons id="controls"> -->
+             <!-- <ion-button  class="modalbutton"  (click)= "stopwatchfunc()"> <b>Start Mission!</b> </ion-button>  -->
+             <ion-button class="modalbutton"  expand="block" fill="solid" slot="end" (click)="go()"> <b> Mission Complete! </b> </ion-button>
+        <!-- </ion-buttons> -->
 
     </Div>
 

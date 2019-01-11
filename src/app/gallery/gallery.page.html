@@ -1,49 +1,54 @@
-<ion-header>
+<!-- <ion-header>
   <ion-toolbar>
     <ion-title>Photo Gallery</ion-title>
   </ion-toolbar>
-</ion-header>
+</ion-header> -->
 
-<ion-content>
-    <ion-card>
-        <ion-img src="assets/16yrold.jpg"></ion-img>
-        <ion-card-header>
-          <ion-card-title style="text-align:center;">@queendom4l</ion-card-title>
-        </ion-card-header>
-      </ion-card>
+<ion-content class="background">
+    <div id="profile" style="display: block">
+        <ion-card>
+            <ion-img style="display:none; "src="assets/AstroChip.png" id="avatarChip"></ion-img>
+            <ion-img style="display:none; "src="assets/AstroAnn.png" id="avatarAnn"></ion-img>
+            <ion-img style="display:none; "src="assets/AstroAndy.png" id="avatarAndy"></ion-img>
+            <ion-img style="display:none; "src="assets/AstroOrange.png" id="avatarOrange"></ion-img>
+            <ion-card-header>
+              <ion-card-title style="text-align:center; color: white;">{{this.restapi.userData.UserName}}</ion-card-title>
+            </ion-card-header>
+          </ion-card>
+        
+          <ion-card>
+            <h6 style="text-align:center; font-size: 20px; color: white;"><b>Name</b>: {{this.restapi.userData.FirstName}} {{this.restapi.userData.LastName}}</h6>
+            <!-- <h6 style="text-align:center; font-size: 20px;"><b>Age</b>: 16</h6>
+            <h6 style="text-align:center; font-size: 20px;"><b>Weight</b>: 116</h6>
+            <h6 style="text-align:center; font-size: 20px;"><b>Height</b>: 5'0</h6>
+            <h6 style="text-align:center; font-size: 20px;"><b>D.O.B</b>: June 3, 2003</h6> -->
+          </ion-card>
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title style="text-align:center; color: white;">Medications</ion-card-title>
+            </ion-card-header>
+            <h6 style="text-align:center; font-size: 20px; color: white;"><b>Adderall</b>: Take every 4-6 hours</h6>
+            <h6 style="text-align:center; font-size: 20px; color: white;"><b>Ritalin</b>: Take twice a day before breakfast and lunch</h6>
+          </ion-card>
+      <ion-grid>
+        <ion-row>
+        <ion-col size="6" *ngFor="let photo of photoService.photos">
+            <img [src]="photo.data"/>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
     
-      <ion-card>
-        <h6 style="text-align:center; font-size: 20px;"><b>Name</b>: Chanel Rubio</h6>
-        <h6 style="text-align:center; font-size: 20px;"><b>Age</b>: 16</h6>
-        <h6 style="text-align:center; font-size: 20px;"><b>Weight</b>: 116</h6>
-        <h6 style="text-align:center; font-size: 20px;"><b>Height</b>: 5'0</h6>
-        <h6 style="text-align:center; font-size: 20px;"><b>D.O.B</b>: June 3, 2003</h6>
-      </ion-card>
-      <ion-card>
-        <ion-card-header>
-          <ion-card-title style="text-align:center">Medications</ion-card-title>
-        </ion-card-header>
-        <h6 style="text-align:center; font-size: 20px;"><b>Adderall</b>: Take every 4-6 hours</h6>
-        <h6 style="text-align:center; font-size: 20px;"><b>Ritalin</b>: Take twice a day before breakfast and lunch</h6>
-      </ion-card>
-  <ion-grid>
-    <ion-row>
-    <ion-col size="6" *ngFor="let photo of photoService.photos">
-        <img [src]="photo.data"/>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-
-  <ion-fab vertical="bottom" horizontal="center" slot="fixed">
-    <ion-fab-button (click)="photoService.takePicture()">
-      <ion-icon name="camera"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
-
-  <ion-fab vertical="bottom" horizontal="left" slot="fixed">
-    <ion-fab-button (click)="goGame()">
-      <ion-icon name="arrow-back"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
+      <ion-fab vertical="bottom" horizontal="center" slot="fixed"style="bottom:120px;">
+        <ion-fab-button (click)="photoService.takePicture()">
+          <ion-icon name="camera"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
+    
+      <ion-fab vertical="bottom" horizontal="left" slot="fixed"style="bottom:20px; left:10px">
+        <ion-fab-button (click)="goGame()">
+          <ion-icon name="arrow-back"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
+    </div>
 
 </ion-content>

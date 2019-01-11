@@ -5,6 +5,7 @@ import {
 import { Router } from '@angular/router';
 import {ModalController} from '@ionic/angular'
 import {Storage} from '@ionic/storage'
+import { RestapiService } from '../restapi.service';
 
 
 
@@ -22,31 +23,34 @@ export class ModalPage implements OnInit {
   totalTime = {
     "hours": 0,
     "mins": 0,
-    "secs": 0
+    "secs": 0, 
+    "fract": 0, 
   };
   constructor(private router: Router,
               private modalCtrl: ModalController,
-              private storage: Storage) {}
-
-  ngOnInit() {}
-
+              private storage: Storage,
+              private restapi: RestapiService) {}
+              
+              ngOnInit() {
+                this.stopwatchfunc()
+              }
+              
+              fract = 0;
   stopwatchfunc() {
     if (this.running == 0) {
       this.running = 1
       this.myVar = setInterval(() => {
         this.time++;
-        this.totalTime.mins = Math.floor(this.time / 10 / 60);
-        this.totalTime.secs = Math.floor(this.time / 10 % 60);
-        this.totalTime.hours = Math.floor(this.time / 10 / 60 / 60);
-        // if (mins < 10) {
-        //   mins = 0 + mins;
-        // }
-        // if (secs < 10) {
-        //   secs = 0 + secs;
-        // }
+        this.fract++;
+        this.totalTime.mins = Math.floor(this.time / 100 / 60);
+        this.totalTime.secs = Math.floor(this.time / 100 % 60);
+        this.totalTime.hours = Math.floor(this.time / 100 / 60 / 60);
+        this.totalTime.fract = Math.floor( this.fract)
+        if (this.fract >100){this.fract = 0}
+        
         let stopwatch = < HTMLInputElement > document.getElementById("output")
-        stopwatch.innerHTML = ( this.totalTime.hours + ":" + this.totalTime.mins + ":" + this.totalTime.secs)
-      }, 100)
+        stopwatch.innerHTML = ( this.totalTime.hours + ":" + this.totalTime.mins + ":" + this.totalTime.secs + ":"+ this.totalTime.fract)
+      }, 10)
     };
   }
 
@@ -55,7 +59,7 @@ export class ModalPage implements OnInit {
     this.saveTime()
     clearInterval(this.myVar)
     this.modalCtrl.dismiss(); 
-    this.router.navigate(['/gallery']); 
+    this.router.navigate(['/game']); 
     
   }
 

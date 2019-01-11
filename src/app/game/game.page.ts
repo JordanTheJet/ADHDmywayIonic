@@ -7,6 +7,7 @@ import { ModalController } from '@ionic/angular';
 import { RestapiService } from '../restapi.service'
 import { AddTaskPage } from '../add-task/add-task.page';
 import { ModalPage} from '../modal/modal.page';
+import { PhotoService } from '../photo.service';
 
 
 @Component({
@@ -34,10 +35,11 @@ totalTime: any
               public alertController: AlertController,
               private restapi: RestapiService,
               private modal: ModalController,
-              private toastCtrl: ToastController) { }
+              private toastCtrl: ToastController,
+              public photoService: PhotoService) { }
 
   ngOnInit() {
-    
+    this.photoService.loadSaved();
     // this.getVariable()
     // let taskNum = `task${this.restapi.userData.currentTaskNum}`
     // this.showData=this.restapi.userData.FullTasks[taskNum].taskName
@@ -117,7 +119,31 @@ this.storage.get('taskTime').then((data)=>{
     }
     else if(this.restapi.userData.FullTasks[currentTaskName].status == "doing"){
       this.restapi.userData.FullTasks[currentTaskName].status = "done"
-      this.restapi.userData.myPoints+= 200;
+      //show hide next planet
+      let planet1 = document.getElementById("planet1")
+      let planet2 = document.getElementById("planet2")
+      let planet3 = document.getElementById("planet3")
+      let planet4 = document.getElementById("planet4")
+      if(planet1.style.display=="block"){
+        planet1.style.display="none"
+        planet2.style.display="block"
+        console.log("show planet 2")
+      }else if(planet2.style.display=="block"){
+        planet2.style.display="none"
+        planet3.style.display="block"
+        console.log("show planet 3")
+      }else if(planet3.style.display=="block"){
+        planet3.style.display="none"
+        planet4.style.display="block"
+        console.log("show planet 4")
+      }else if(planet4.style.display=="block"){
+        planet4.style.display="none"
+        planet1.style.display="block"
+        console.log("show planet 1")
+      }else{
+        console.log("something wrong with show hide")
+      }
+      this.pointToast()
       this.restapi.userData.currentTaskNum++;
       this.restapi.updateTask()
       console.log(this.restapi.userData.currentTaskNum)
@@ -134,6 +160,7 @@ this.storage.get('taskTime').then((data)=>{
     }
   }
   }
+  
   async addTask() {
     const alert = await this.alertController.create({
       header: 'Add Task Name',
@@ -191,6 +218,37 @@ this.storage.get('taskTime').then((data)=>{
       this.currentIndex=data;
       console.log('Current index is', this.currentIndex);
     console.log(typeof this.currentIndex)
+    let chip = document.getElementById("avatarChip")
+      let ann = document.getElementById("avatarAnn")
+      let andy = document.getElementById("avatarAndy")
+      let orange = document.getElementById("avatarOrange")
+    if(this.currentIndex==0){
+      ann.style.display="none"
+      andy.style.display="none"
+      orange.style.display="none"
+      chip.style.display="block"
+      console.log("show chip")
+    }else if(this.currentIndex==1){
+      chip.style.display="none"
+      andy.style.display="none"
+      orange.style.display="none"
+      ann.style.display="block"
+      console.log("show ann")
+    }else if(this.currentIndex==2){
+      ann.style.display="none"
+      chip.style.display="none"
+      orange.style.display="none"
+      andy.style.display="block"
+      console.log("show andy")
+    }else if(this.currentIndex==3){
+      ann.style.display="none"
+      andy.style.display="none"
+      chip.style.display="none"
+      orange.style.display="block"
+      console.log("show orange")
+    }else{
+      console.log("something wrong with show hide profile")
+    }
       });;
   }
   avatarSelect(){
@@ -233,12 +291,11 @@ this.storage.get('taskTime').then((data)=>{
  
    async pointToast(){
      const ptToast = await this.toastCtrl.create({
-       message: "You did it! +300", 
+       message: "You did it! +200", 
        duration: 2000,
        position: "middle", 
        color: "danger"
        
- 
      }); 
      ptToast.onDidDismiss().then(()=> {
        this.addpoints(); 
@@ -250,7 +307,7 @@ this.storage.get('taskTime').then((data)=>{
    }
  
    addpoints(){
-    this.restapi.userData.myPoints += 300;
+    this.restapi.userData.myPoints += 200;
    
    }
 
@@ -278,12 +335,12 @@ let calendar = document.getElementById("calendar")
 calendar.style.display= "block"
 }
 switchToProfile(){
-  this.router.navigate(['/gallery'])
-// this.hideAvatar()
-// this.hideCalendar()
-// this.hideReport()
-// let profile = document.getElementById("profile")
-// profile.style.display="block"
+  // this.router.navigate(['/gallery'])
+this.hideAvatar()
+this.hideCalendar()
+this.hideReport()
+let profile = document.getElementById("profile")
+profile.style.display="block"
 }
 switchToAvatar(){
 this.hideProfile()
@@ -318,5 +375,8 @@ console.log(contentValue)
     console.log("something went wrong")
   }
   
+}
+gotoGallery(){
+  this.router.navigate(['/gallery'])
 }
 }

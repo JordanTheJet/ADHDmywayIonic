@@ -1,0 +1,45 @@
+ion-content {
+    --background: url('../../assets/spacetravel.gif') no-repeat center center / cover;
+    
+}
+
+h1 {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color: white; 
+    text-align: center;
+    font-style: bold;
+    font-size: 3rem;
+
+}
+
+h2 {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color: white; 
+    text-align: center;
+    font-style: bold;
+    font-size: 3rem;
+
+
+}
+
+// ion-buttons{ 
+//     font-family: Georgia, 'Times New Roman', Times, serif; 
+//     text-align: center; 
+//     padding: 15%; 
+// }
+
+
+ion-card{ 
+    text-align:center; 
+    position: relative;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; 
+    font-size: 2rem; 
+
+}
+
+// .modalbutton {
+//     text-align: center;
+//     font-family: Georgia, 'Times New Roman', Times, serif;
+//     color: black;
+//     font-size: 1rem; 
+// }

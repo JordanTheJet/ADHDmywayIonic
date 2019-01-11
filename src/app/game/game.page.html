@@ -2,10 +2,12 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 </header>
 
-<ion-content padding class="background">
-  <ion-item>
-    <ion-badge slot="end"> MyPoints: {{this.restapi.userData.myPoints}}</ion-badge>
+<ion-content padding class="bgimg no-scroll">
+  
+  <ion-item no-lines style="--background:transparent" >
+    <ion-badge slot="end" > MyPoints: {{this.restapi.userData.myPoints}}</ion-badge>
   </ion-item>
+  
   <!-- <ion-label>{{myPoints}}</ion-label> -->
   <!-- <ion-button (click)="getStuff()">get stuff</ion-button> -->
 <!-- <ion-button (click)="gotoHome()" >Back to home</ion-button> -->
@@ -13,8 +15,8 @@
     <!-- <a href="#" class="icon"><i class="far fa-plus-square"></i></a> -->
     <!-- <a href="#" class="icon"><i class="fas fa-search-minus"></i></a> -->
     <a (click)= "switchToCalendar()" class="icon"><i class="fas fa-rocket"></i></a> 
-    <a (click)= "switchToProfile()" class="icon"><i class="fas fa-tshirt"></i></a>
-    <a (click)= "switchToAvatar()" class="icon"><i class="fas fa-user-astronaut"></i></a>
+    <a (click)= "switchToAvatar()" class="icon"><i class="fas fa-tshirt"></i></a>
+    <a (click)= "switchToGallery()" class="icon"><i class="fas fa-user-astronaut"></i></a>
     <a (click)="switchToReport()" class="iconRight"><i class="fas fa-notes-medical"></i></a>
     <!-- <a (click)="hideCalendar()" class="iconRight"><i class="fas fa-cog"></i></a> -->
   </div>
@@ -26,7 +28,10 @@
       <h1>{{this.restapi.taskID}}</h1>
       <div id="taskLabel"></div>
      
-      <ion-img (click)="startTask()" class= ".planets" src="assets/planet1.png"> </ion-img>
+      <ion-img (click)="startTask()" class= ".planets" src="assets/planet1.png" style="display:block" id="planet1"> </ion-img>
+      <ion-img (click)="startTask()" class= ".planets" src="assets/planet2.png" style="display:none" id="planet2"> </ion-img>
+      <ion-img (click)="startTask()" class= ".planets" src="assets/planet3.png" style="display:none" id="planet3"> </ion-img>
+      <ion-img (click)="startTask()" class= ".planets" src="assets/planet4.png" style="display:none" id="planet4"> </ion-img>
       <!-- put label of object on top of here -->
       <!-- <ion-button id="task" (click)="startTask()">Start Task</ion-button> -->
       <!-- <ion-button (click)="getTime()">Show Time</ion-button> -->
@@ -46,9 +51,7 @@
 </div>
   <!-- end of calendar div -->
 
-  <!-- profile below -->
-<div id="profile" style="display: none">Profile</div>
-<!-- end of profile -->
+ 
 
   <!-- avatar div below -->
   <div id="avatar" style="display: none">
@@ -61,16 +64,7 @@
             <ion-card-title>
               <h1 class="avatarLabel">Astro Chip 1000</h1>
             </ion-card-title>
-            <ion-img src="assets/Astro1.jpg" class="img"></ion-img>
-          </ion-card>
-        </ion-slide>
-    
-        <ion-slide>
-          <ion-card>
-            <ion-card-title>
-              <h1 class="avatarLabel">Astro Andy 1000</h1>
-            </ion-card-title>
-            <ion-img src="assets/Astro1.jpeg" class="img"></ion-img>
+            <ion-img src="assets/AstroChip.png" class="img"></ion-img>
           </ion-card>
         </ion-slide>
     
@@ -79,7 +73,16 @@
             <ion-card-title>
               <h1 class="avatarLabel">Astro Ann 1000</h1>
             </ion-card-title>
-            <ion-img src="assets/girlAstro.jpg" class="img"></ion-img>
+            <ion-img src="assets/AstroAnn.png" class="img"></ion-img>
+          </ion-card>
+        </ion-slide>
+    
+        <ion-slide>
+          <ion-card>
+            <ion-card-title>
+              <h1 class="avatarLabel">Astro Andy 1000</h1>
+            </ion-card-title>
+            <ion-img src="assets/AstroAndy.png" class="img"></ion-img>
           </ion-card>
         </ion-slide>
     
@@ -88,16 +91,7 @@
             <ion-card-title>
               <h1 class="avatarLabel">Astro Robo 500</h1>
             </ion-card-title>
-            <ion-img src="assets/astro2.jpg" class="img"></ion-img>
-          </ion-card>
-        </ion-slide>
-    
-        <ion-slide>
-          <ion-card>
-            <ion-card-title>
-              <h1 class="avatarLabel">Astro Felix 500</h1>
-            </ion-card-title>
-            <ion-img src="assets/kidAstro.jpg" class="img"></ion-img>
+            <ion-img src="assets/AstroOrange.png" class="img"></ion-img>
           </ion-card>
         </ion-slide>
     
@@ -118,9 +112,9 @@
         <ion-segment-button class="avatarLabel" value="MedQ">
           MedQ
         </ion-segment-button>
-        <ion-segment-button class="avatarLabel" value="Achievements">
+        <!-- <ion-segment-button class="avatarLabel" value="Achievements">
           Achievements
-        </ion-segment-button>
+        </ion-segment-button> -->
       </ion-segment>
       <!-- <ion-toolbar>
             <ion-segment>
@@ -189,6 +183,10 @@
       <ion-button red="yes">Yes</ion-button>
       <ion-button red="no">No</ion-button>
     </ion-card>
+    <br>
+    <br>
+    <br>  
+    <br>
     </div>
     
     
@@ -199,5 +197,51 @@
     </div>
 </div>
 <!-- end of report div -->
-<script src="game.page.ts"></script>
+<!-- profile div below -->
+<div id="profile" style="display: none">
+    <ion-card>
+        <ion-img style="display:none; "src="assets/AstroChip.png" id="avatarChip"></ion-img>
+        <ion-img style="display:none; "src="assets/AstroAnn.png" id="avatarAnn"></ion-img>
+        <ion-img style="display:none; "src="assets/AstroAndy.png" id="avatarAndy"></ion-img>
+        <ion-img style="display:none; "src="assets/AstroOrange.png" id="avatarOrange"></ion-img>
+        <ion-card-header>
+          <ion-card-title style="text-align:center; color: white;">{{this.restapi.userData.UserName}}</ion-card-title>
+        </ion-card-header>
+      </ion-card>
+    
+      <ion-card>
+        <h6 style="text-align:center; font-size: 20px; color: white;"><b>Name</b>: {{this.restapi.userData.FirstName}} {{this.restapi.userData.LastName}}</h6>
+        <!-- <h6 style="text-align:center; font-size: 20px;"><b>Age</b>: 16</h6>
+        <h6 style="text-align:center; font-size: 20px;"><b>Weight</b>: 116</h6>
+        <h6 style="text-align:center; font-size: 20px;"><b>Height</b>: 5'0</h6>
+        <h6 style="text-align:center; font-size: 20px;"><b>D.O.B</b>: June 3, 2003</h6> -->
+      </ion-card>
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title style="text-align:center; color: white;">Medications</ion-card-title>
+        </ion-card-header>
+        <h6 style="text-align:center; font-size: 20px; color: white;"><b>Adderall</b>: Take every 4-6 hours</h6>
+        <h6 style="text-align:center; font-size: 20px; color: white;"><b>Ritalin</b>: Take twice a day before breakfast and lunch</h6>
+      </ion-card>
+  <ion-grid>
+    <ion-row>
+    <ion-col size="6" *ngFor="let photo of photoService.photos">
+        <img [src]="photo.data"/>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-fab vertical="bottom" horizontal="center" slot="fixed"style="bottom:120px;">
+    <ion-fab-button (click)="photoService.takePicture()">
+      <ion-icon name="camera"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <!-- <ion-fab vertical="bottom" horizontal="left" slot="fixed"style="bottom:20px; left:-1px">
+    <ion-fab-button (click)="goGame()">
+      <ion-icon name="arrow-back"></ion-icon>
+    </ion-fab-button>
+  </ion-fab> -->
+</div>
+<!-- end of profile div -->
 </ion-content>
