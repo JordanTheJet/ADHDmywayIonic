@@ -136,11 +136,11 @@
           <ion-input type="date" [(ngModel)]="dob"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label>Feet:</ion-label>
+          <ion-label>Height (Feet):</ion-label>
           <ion-input type="number" [(ngModel)]="feet"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label>Inches:</ion-label>
+          <ion-label>Height (Inches):</ion-label>
           <ion-input type="number" [(ngModel)]="inches"></ion-input>
         </ion-item>
         <ion-item>
@@ -239,10 +239,10 @@
   <!-- profile div below -->
   <div id="profile" style="display: none">
     <ion-card>
-      <ion-img style="display:none; text-align:center; height: 300px; width: 200px;" src="assets/AstroChip.png" id="avatarChip"></ion-img>
-      <ion-img style="display:none; text-align:center; height: 300px; width: 200px;" src="assets/AstroAnn.png" id="avatarAnn"></ion-img>
-      <ion-img style="display:none; text-align:center; height: 300px; width: 200px;" src="assets/AstroAndy.png" id="avatarAndy"></ion-img>
-      <ion-img style="display:none; text-align:center; height: 300px; width: 200px;" src="assets/AstroOrange.png" id="avatarOrange"></ion-img>
+      <ion-img style="display:none; height: 300px; width: 200px;" class="center"src="assets/AstroChip.png" id="avatarChip"></ion-img>
+      <ion-img style="display:none; height: 300px; width: 200px;" class="center"src="assets/AstroAnn.png" id="avatarAnn"></ion-img>
+      <ion-img style="display:none; height: 300px; width: 200px;" class="center"src="assets/AstroAndy.png" id="avatarAndy"></ion-img>
+      <ion-img style="display:none; height: 300px; width: 200px;" class="center"src="assets/AstroOrange.png" id="avatarOrange"></ion-img>
       <ion-card-header>
         <ion-card-title style="text-align:center; color: white;">{{this.restapi.userData.UserName}}</ion-card-title>
       </ion-card-header>

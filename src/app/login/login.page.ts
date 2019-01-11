@@ -19,28 +19,29 @@ currentUser: string;
               public api: RestapiService) { }
 
   ngOnInit() {
-    var autoUser= this.cognito.getAuthenticatedUser()
-    console.log(autoUser)
-    if (autoUser != null) {
-      this.api.getData()
-      setTimeout(() => {
-        this.router.navigate(['/game'])
-      }, 1000);
+    this.autoSignIn()
+    // var autoUser= this.cognito.getAuthenticatedUser()
+    // console.log(autoUser)
+    // if (autoUser != null) {
+    //   this.api.getData()
+    //   setTimeout(() => {
+    //     this.router.navigate(['/game'])
+    //   }, 1000);
       
-      autoUser.getSession(function(err, session) {
-          if (err) {
-              alert(err);
-              return;
-          }
-          console.log(session)
-          console.log('session validity: ' + session.isValid());
-          let status= session.isValid().toString()
-          console.log(status)
-      });
-    } else {
-      console.log("there was no one signed in")
-    }
-    console.log("autosignin clicked")
+    //   autoUser.getSession(function(err, session) {
+    //       if (err) {
+    //           alert(err);
+    //           return;
+    //       }
+    //       console.log(session)
+    //       console.log('session validity: ' + session.isValid());
+    //       let status= session.isValid().toString()
+    //       console.log(status)
+    //   });
+    // } else {
+    //   console.log("there was no one signed in")
+    // }
+    // console.log("autosignin clicked")
   }
   
  

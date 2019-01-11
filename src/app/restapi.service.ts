@@ -122,7 +122,7 @@ let myHeaders = new HttpHeaders({
 let postUserName = {
   "Email": myUser.getUsername()
 }
-
+console.log(postUserName)
     this.http.post('https://nphtfo2p2j.execute-api.us-east-1.amazonaws.com/12-20Stage/ADHDGetFromDynamoDB', 
     JSON.stringify(postUserName))
 .subscribe( response => {

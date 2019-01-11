@@ -94,7 +94,11 @@
   --ion-color-light-shade: #d7d8da;
   --ion-color-light-tint: #f5f6f9;
 }
-
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
 .background{
   height: 100%;
   --ion-background-color: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
