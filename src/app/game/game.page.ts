@@ -25,6 +25,14 @@ export class GamePage implements OnInit {
   };
 currentIndex: number;
 inputStuff: string;
+dob: any;
+feet: number;
+inches: number;
+weight: number;
+medication: string;
+dosage: number;
+frequency: number;
+
 showData = 'string';
 value = 0;
 FullTasks= {}
@@ -116,6 +124,7 @@ this.storage.get('taskTime').then((data)=>{
     console.log(this.restapi.userData.FullTasks)
     this.restapi.postData(this.restapi.userData)
     this.showModal()
+    this.switchToProfile()
     }
     else if(this.restapi.userData.FullTasks[currentTaskName].status == "doing"){
       this.restapi.userData.FullTasks[currentTaskName].status = "done"
@@ -170,7 +179,7 @@ this.storage.get('taskTime').then((data)=>{
           name: 'taskName',
           type: 'text',
           id: 'taskName',
-          value: 'homework',
+          // value: 'homework',
           placeholder: 'What are you going to do?'
         },
         // input date with min & max
@@ -298,7 +307,7 @@ this.storage.get('taskTime').then((data)=>{
        
      }); 
      ptToast.onDidDismiss().then(()=> {
-       this.addpoints(); 
+       this.addpoints200(); 
        this.savePoints();
        this.getPoints();
      })
@@ -306,9 +315,12 @@ this.storage.get('taskTime').then((data)=>{
      ptToast.present();   
    }
  
-   addpoints(){
+   addpoints200(){
     this.restapi.userData.myPoints += 200;
    
+   }
+   addpoints20(){
+    this.restapi.userData.myPoints += 20
    }
 
 hideCalendar(){

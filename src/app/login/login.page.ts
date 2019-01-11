@@ -66,7 +66,9 @@ currentUser: string;
   }
 
   
- 
+ goToSignup(){
+   this.router.navigate(['/signup'])
+ }
   async loginErrToast(){
     const loginToast = await this.toast.create({
       message: "Whoops! Your username or password is incorrect. Please try again.", 

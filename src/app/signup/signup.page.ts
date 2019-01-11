@@ -85,7 +85,7 @@ export class SignupPage implements OnInit {
     this.userData.FirstName=this.firstName;
     this.userData.LastName=this.lastName;
     this.taskBuilder()
-
+    console.log(this.userData)
     this.api.postData(this.userData)
     this.router.navigate(['/login'])
   }
@@ -94,7 +94,7 @@ export class SignupPage implements OnInit {
     let currentTaskName= "task0"
     
     let dummyTask = {
-      "taskName": "Take A Selfie!",
+      "taskName": "The medical questionnaire",
       "status": "not done"
     }
     this.userData.FullTasks[currentTaskName]=dummyTask
@@ -150,8 +150,8 @@ export class SignupPage implements OnInit {
   async successAlert() { 
     const alert = await this.alertCtrl.create({ 
       header: "Success", 
-      message: "You are now registered!", 
-      buttons: ["Sweet!"] 
+      message: "You are now registered to ADHDmyway!", 
+      buttons: ["Get Started!"] 
       }); 
       alert.onDidDismiss().then( () => { 
       // navigate to home page 

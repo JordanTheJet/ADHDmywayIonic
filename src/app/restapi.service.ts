@@ -10,6 +10,7 @@ export class RestapiService {
 data: any
 // autoUser = this.cognitoService.getAuthenticatedUser().getUsername()
 taskID: string;
+doingTask= 0;
 userData = {
   "Email": "",
   "FirstName": "",
@@ -27,6 +28,7 @@ userData = {
 
   postData(userData) {
     let myUser = this.cognitoService.getAuthenticatedUser();
+    console.log(myUser)
 if (myUser === null) { // if there’s no data, leave function
 console.log("user is null");
 return;

@@ -113,6 +113,8 @@ authenticate(email, password) {
 
   getAuthenticatedUser() {
     return this.userPool.getCurrentUser();
+    console.log(this.userPool)
+    console.log(this.userPool.getCurrentUser())
     }
 
 }

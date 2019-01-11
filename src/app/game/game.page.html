@@ -1,247 +1,292 @@
 <header>
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
+    crossorigin="anonymous">
 </header>
 
 <ion-content padding class="bgimg no-scroll">
-  
-  <ion-item no-lines style="--background:transparent" >
-    <ion-badge slot="end" > MyPoints: {{this.restapi.userData.myPoints}}</ion-badge>
+
+  <ion-item no-lines style="--background:transparent">
+    <ion-badge slot="end"> MyPoints: {{this.restapi.userData.myPoints}}</ion-badge>
   </ion-item>
-  
+
   <!-- <ion-label>{{myPoints}}</ion-label> -->
   <!-- <ion-button (click)="getStuff()">get stuff</ion-button> -->
-<!-- <ion-button (click)="gotoHome()" >Back to home</ion-button> -->
+  <!-- <ion-button (click)="gotoHome()" >Back to home</ion-button> -->
   <div class="icon-bar">
     <!-- <a href="#" class="icon"><i class="far fa-plus-square"></i></a> -->
     <!-- <a href="#" class="icon"><i class="fas fa-search-minus"></i></a> -->
-    <a (click)= "switchToCalendar()" class="icon"><i class="fas fa-rocket"></i></a> 
-    <a (click)= "switchToAvatar()" class="icon"><i class="fas fa-tshirt"></i></a>
-    <a (click)= "switchToGallery()" class="icon"><i class="fas fa-user-astronaut"></i></a>
+    <a (click)="switchToCalendar()" class="icon"><i class="fas fa-rocket"></i></a>
+    <a (click)="switchToAvatar()" class="icon"><i class="fas fa-tshirt"></i></a>
+    <a (click)="switchToProfile()" class="icon"><i class="fas fa-user-astronaut"></i></a>
     <a (click)="switchToReport()" class="iconRight"><i class="fas fa-notes-medical"></i></a>
     <!-- <a (click)="hideCalendar()" class="iconRight"><i class="fas fa-cog"></i></a> -->
   </div>
   <!-- calendar part below -->
-<div id="calendar" style="display: block">
-<!-- <ion-button (click)="gotoHome()" >Back to home</ion-button> -->
-  <div class='title'>
-    <div class="container">
-      <h1>{{this.restapi.taskID}}</h1>
-      <div id="taskLabel"></div>
-     
-      <ion-img (click)="startTask()" class= ".planets" src="assets/planet1.png" style="display:block" id="planet1"> </ion-img>
-      <ion-img (click)="startTask()" class= ".planets" src="assets/planet2.png" style="display:none" id="planet2"> </ion-img>
-      <ion-img (click)="startTask()" class= ".planets" src="assets/planet3.png" style="display:none" id="planet3"> </ion-img>
-      <ion-img (click)="startTask()" class= ".planets" src="assets/planet4.png" style="display:none" id="planet4"> </ion-img>
-      <!-- put label of object on top of here -->
-      <!-- <ion-button id="task" (click)="startTask()">Start Task</ion-button> -->
-      <!-- <ion-button (click)="getTime()">Show Time</ion-button> -->
+  <div id="calendar" style="display: block">
+    <!-- <ion-button (click)="gotoHome()" >Back to home</ion-button> -->
+    <div class='title'>
+      <div class="container">
+        <h1>{{this.restapi.taskID}}</h1>
+        <div id="taskLabel"></div>
+
+        <ion-img (click)="startTask()" class=".planets" src="assets/planet1.png" style="display:block" id="planet1">
+        </ion-img>
+        <ion-img (click)="startTask()" class=".planets" src="assets/planet2.png" style="display:none" id="planet2">
+        </ion-img>
+        <ion-img (click)="startTask()" class=".planets" src="assets/planet3.png" style="display:none" id="planet3">
+        </ion-img>
+        <ion-img (click)="startTask()" class=".planets" src="assets/planet4.png" style="display:none" id="planet4">
+        </ion-img>
+        <!-- put label of object on top of here -->
+        <!-- <ion-button id="task" (click)="startTask()">Start Task</ion-button> -->
+        <!-- <ion-button (click)="getTime()">Show Time</ion-button> -->
+      </div>
     </div>
-  </div>
-  <!-- <ion-input required type='text' [(ngModel)]='inputStuff'></ion-input>
+    <!-- <ion-input required type='text' [(ngModel)]='inputStuff'></ion-input>
   <ion-button (click)="saveVariable()">Save</ion-button>
   <ion-button (click)="getVariable()">Get</ion-button>
   <ion-item>
     <ion-label>{{showData}}</ion-label>
   </ion-item> -->
 
-  <div style="position: fixed; bottom: 95px; right: 15px;">
-      <ion-img (click)="addTask()" style="position: fixed; bottom:75px; right:1px" src= "assets/coolSun.png" class= "coolSun"></ion-img> 
-    <!-- <ion-button (click)="addTask()">Add Task</ion-button> -->
+    <div style="position: fixed; bottom: 95px; right: 15px;">
+      <ion-img (click)="addTask()" style="position: fixed; bottom:75px; right:1px" src="assets/coolSun.png" class="coolSun"></ion-img>
+      <!-- <ion-button (click)="addTask()">Add Task</ion-button> -->
+    </div>
   </div>
-</div>
   <!-- end of calendar div -->
 
- 
+
 
   <!-- avatar div below -->
   <div id="avatar" style="display: none">
-      <h1 style="text-align:center;"class="avatarLabel">Choose an Avatar</h1>
+    <h1 style="text-align:center;" class="avatarLabel">Choose an Avatar</h1>
 
-      <ion-slides (ionSlideDidChange)="slideChanged()" pager="true"scrollbar="true" [options]="slideOpts" style="max-width: 100%; max-height: 100%; --ion-background-color: white">
-    
-        <ion-slide>
-          <ion-card>
-            <ion-card-title>
-              <h1 class="avatarLabel">Astro Chip 1000</h1>
-            </ion-card-title>
-            <ion-img src="assets/AstroChip.png" class="img"></ion-img>
-          </ion-card>
-        </ion-slide>
-    
-        <ion-slide>
-          <ion-card>
-            <ion-card-title>
-              <h1 class="avatarLabel">Astro Ann 1000</h1>
-            </ion-card-title>
-            <ion-img src="assets/AstroAnn.png" class="img"></ion-img>
-          </ion-card>
-        </ion-slide>
-    
-        <ion-slide>
-          <ion-card>
-            <ion-card-title>
-              <h1 class="avatarLabel">Astro Andy 1000</h1>
-            </ion-card-title>
-            <ion-img src="assets/AstroAndy.png" class="img"></ion-img>
-          </ion-card>
-        </ion-slide>
-    
-        <ion-slide>
-          <ion-card>
-            <ion-card-title>
-              <h1 class="avatarLabel">Astro Robo 500</h1>
-            </ion-card-title>
-            <ion-img src="assets/AstroOrange.png" class="img"></ion-img>
-          </ion-card>
-        </ion-slide>
-    
-      </ion-slides>
-    
-    
+    <ion-slides (ionSlideDidChange)="slideChanged()" pager="true" scrollbar="true" [options]="slideOpts" style="max-width: 100%; max-height: 100%; --ion-background-color: white">
+
+      <ion-slide>
+        <ion-card>
+          <ion-card-title>
+            <h1 class="avatarLabel">Astro Chip 1000</h1>
+          </ion-card-title>
+          <ion-img src="assets/AstroChip.png" class="img"></ion-img>
+        </ion-card>
+      </ion-slide>
+
+      <ion-slide>
+        <ion-card>
+          <ion-card-title>
+            <h1 class="avatarLabel">Astro Ann 1000</h1>
+          </ion-card-title>
+          <ion-img src="assets/AstroAnn.png" class="img"></ion-img>
+        </ion-card>
+      </ion-slide>
+
+      <ion-slide>
+        <ion-card>
+          <ion-card-title>
+            <h1 class="avatarLabel">Astro Andy 1000</h1>
+          </ion-card-title>
+          <ion-img src="assets/AstroAndy.png" class="img"></ion-img>
+        </ion-card>
+      </ion-slide>
+
+      <ion-slide>
+        <ion-card>
+          <ion-card-title>
+            <h1 class="avatarLabel">Astro Robo 500</h1>
+          </ion-card-title>
+          <ion-img src="assets/AstroOrange.png" class="img"></ion-img>
+        </ion-card>
+      </ion-slide>
+
+    </ion-slides>
+
+
     <ion-row padding>
       <ion-col>
         <ion-button expand="block" (click)="purBtn()">Purchase</ion-button>
       </ion-col>
     </ion-row>
   </div>
-<!-- end of avatar div -->
+  <!-- end of avatar div -->
 
-<!-- report div below -->
-<div id="report" style="display: none">
+  <!-- report div below -->
+  <div id="report" style="display: none">
     <ion-segment [(ngModel)]="relationship" color="primary" (ionChange)="segmentChanged($event)">
-        <ion-segment-button class="avatarLabel" value="MedQ">
-          MedQ
-        </ion-segment-button>
-        <!-- <ion-segment-button class="avatarLabel" value="Achievements">
+      <ion-segment-button class="avatarLabel" value="MedQ">
+        Medical Questionnaire
+      </ion-segment-button>
+      <!-- <ion-segment-button class="avatarLabel" value="Achievements">
           Achievements
         </ion-segment-button> -->
-      </ion-segment>
-      <!-- <ion-toolbar>
+    </ion-segment>
+    <!-- <ion-toolbar>
             <ion-segment>
               <ion-segment-button  (ionSelect) ="showMedQ()" value="MEDQ" checked> MED Q</ion-segment-button>
               <ion-segment-button (ionSelect)="showAchievement()" value="Achievments">Achievments</ion-segment-button>
             </ion-segment>
       </ion-toolbar> -->
-    <div  class= "medQ" id="QuestionList">
+    <div class="medQ" id="QuestionList">
       <!-- <h1>testing stuff</h1> -->
-    <ion-card>
-      <ion-card-content class="avatarLabel">Do you struggle with monitoring task completion?</ion-card-content>
-      <ion-button (click)="q1" red="yes">Yes</ion-button>
-      <ion-button red="no">No</ion-button>
-    </ion-card>
-    
-    <ion-card>
-      <ion-card-content class="avatarLabel">Do you require many reminders to stay on task?</ion-card-content>
-      <ion-button red="yes">Yes</ion-button>
-      <ion-button red="no">No</ion-button>
-    </ion-card>
-    
-    <ion-card>
-      <ion-card-content class="avatarLabel">Do you have dificulty starting on task?</ion-card-content>
-      <ion-button red="yes">Yes</ion-button>
-      <ion-button red="no">No</ion-button>
-    </ion-card>
-    
-    <ion-card>
-      <ion-card-content class="avatarLabel">Do you forget to turn in completed work? </ion-card-content>
+      <ion-card>
+        <h6 style="text-align:center; font-size: 20px; color: white;"><b>Personal Information</b></h6>
+        <ion-item>
+          <ion-label>D.O.B:</ion-label>
+          <ion-input type="date" [(ngModel)]="dob"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Feet:</ion-label>
+          <ion-input type="number" [(ngModel)]="feet"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Inches:</ion-label>
+          <ion-input type="number" [(ngModel)]="inches"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Weight (lbs):</ion-label>
+          <ion-input type="number" [(ngModel)]="weight"></ion-input>
+        </ion-item>
+      </ion-card>
+      <h6 style="text-align:center; font-size: 20px; color: white;"><b>Medication</b></h6>
+      <ion-item>
+        <ion-label>Medication name:</ion-label>
+        <ion-input type="text" [(ngModel)]="medication"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Dosage (mg):</ion-label>
+        <ion-input type="number" [(ngModel)]="dosage"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Frequency (days):</ion-label>
+        <ion-input type="number" [(ngModel)]="frequency"></ion-input>
+      </ion-item>
+      <ion-card>
+        <ion-card-content class="avatarLabel">Do you struggle with monitoring task completion?</ion-card-content>
+        <ion-button (click)="q1" red="yes">Yes</ion-button>
+        <ion-button red="no">No</ion-button>
+      </ion-card>
+
+      <ion-card>
+        <ion-card-content class="avatarLabel">Do you require many reminders to stay on task?</ion-card-content>
         <ion-button red="yes">Yes</ion-button>
         <ion-button red="no">No</ion-button>
-    </ion-card>
-    
-    <ion-card>
-      <ion-card-content class="avatarLabel">Do you forget the details of a text while reading or soon after finishing? </ion-card-content>
-      <ion-button red="yes">Yes</ion-button>
-      <ion-button red="no">No</ion-button>
-    </ion-card>
-    
-    <ion-card>
-      <ion-card-content class="avatarLabel">Struggle with keeping track of needed material?</ion-card-content>
-      <ion-button red="yes">Yes</ion-button>
-      <ion-button red="no">No</ion-button>
-    </ion-card>
-    
-    <ion-card>
-      <ion-card-content class="avatarLabel">Do you lack proper social skills with peers and adults?</ion-card-content>
-      <ion-button red="yes">Yes</ion-button>
-      <ion-button red="no">No</ion-button>
-    </ion-card>
-    
-    <ion-card>
-      <ion-card-content class="avatarLabel">Are you easily distracted?</ion-card-content>
-      <ion-button red="yes">Yes</ion-button>
-      <ion-button red="no">No</ion-button>
-    </ion-card>
-    
-    <ion-card>
-      <ion-card-content class="avatarLabel">Do you seem to struggle making decisions?</ion-card-content>
-      <ion-button red="yes">Yes</ion-button>
-      <ion-button red="no">No</ion-button>
-    </ion-card>
-    
-    <ion-card>
-      <ion-card-content class="avatarLabel">Do you stuggle to understand that there is more then one way to solve a problem?</ion-card-content>
-      <ion-button red="yes">Yes</ion-button>
-      <ion-button red="no">No</ion-button>
-    </ion-card>
-    <br>
-    <br>
-    <br>  
-    <br>
+      </ion-card>
+
+      <ion-card>
+        <ion-card-content class="avatarLabel">Do you have dificulty starting on task?</ion-card-content>
+        <ion-button red="yes">Yes</ion-button>
+        <ion-button red="no">No</ion-button>
+      </ion-card>
+
+      <ion-card>
+        <ion-card-content class="avatarLabel">Do you forget to turn in completed work? </ion-card-content>
+        <ion-button red="yes">Yes</ion-button>
+        <ion-button red="no">No</ion-button>
+      </ion-card>
+
+      <ion-card>
+        <ion-card-content class="avatarLabel">Do you forget the details of a text while reading or soon after
+          finishing? </ion-card-content>
+        <ion-button red="yes">Yes</ion-button>
+        <ion-button red="no">No</ion-button>
+      </ion-card>
+
+      <ion-card>
+        <ion-card-content class="avatarLabel">Struggle with keeping track of needed material?</ion-card-content>
+        <ion-button red="yes">Yes</ion-button>
+        <ion-button red="no">No</ion-button>
+      </ion-card>
+
+      <ion-card>
+        <ion-card-content class="avatarLabel">Do you lack proper social skills with peers and adults?</ion-card-content>
+        <ion-button red="yes">Yes</ion-button>
+        <ion-button red="no">No</ion-button>
+      </ion-card>
+
+      <ion-card>
+        <ion-card-content class="avatarLabel">Are you easily distracted?</ion-card-content>
+        <ion-button red="yes">Yes</ion-button>
+        <ion-button red="no">No</ion-button>
+      </ion-card>
+
+      <ion-card>
+        <ion-card-content class="avatarLabel">Do you seem to struggle making decisions?</ion-card-content>
+        <ion-button red="yes">Yes</ion-button>
+        <ion-button red="no">No</ion-button>
+      </ion-card>
+
+      <ion-card>
+        <ion-card-content class="avatarLabel">Do you stuggle to understand that there is more then one way to solve a
+          problem?</ion-card-content>
+        <ion-button red="yes">Yes</ion-button>
+        <ion-button red="no">No</ion-button>
+      </ion-card>
+      <br>
+      <br>
+      <br>
+      <br>
     </div>
-    
-    
+
+
     <div class="Achievement" id="AchievementList">
-    <ion-card>
-      <ion-card-content class="avatarLabel">Your Achievments</ion-card-content>
-    </ion-card>
+      <ion-card>
+        <ion-card-content class="avatarLabel">Your Achievments</ion-card-content>
+      </ion-card>
     </div>
-</div>
-<!-- end of report div -->
-<!-- profile div below -->
-<div id="profile" style="display: none">
+  </div>
+  <!-- end of report div -->
+  <!-- profile div below -->
+  <div id="profile" style="display: none">
     <ion-card>
-        <ion-img style="display:none; "src="assets/AstroChip.png" id="avatarChip"></ion-img>
-        <ion-img style="display:none; "src="assets/AstroAnn.png" id="avatarAnn"></ion-img>
-        <ion-img style="display:none; "src="assets/AstroAndy.png" id="avatarAndy"></ion-img>
-        <ion-img style="display:none; "src="assets/AstroOrange.png" id="avatarOrange"></ion-img>
-        <ion-card-header>
-          <ion-card-title style="text-align:center; color: white;">{{this.restapi.userData.UserName}}</ion-card-title>
-        </ion-card-header>
-      </ion-card>
-    
-      <ion-card>
-        <h6 style="text-align:center; font-size: 20px; color: white;"><b>Name</b>: {{this.restapi.userData.FirstName}} {{this.restapi.userData.LastName}}</h6>
-        <!-- <h6 style="text-align:center; font-size: 20px;"><b>Age</b>: 16</h6>
-        <h6 style="text-align:center; font-size: 20px;"><b>Weight</b>: 116</h6>
-        <h6 style="text-align:center; font-size: 20px;"><b>Height</b>: 5'0</h6>
-        <h6 style="text-align:center; font-size: 20px;"><b>D.O.B</b>: June 3, 2003</h6> -->
-      </ion-card>
-      <ion-card>
-        <ion-card-header>
-          <ion-card-title style="text-align:center; color: white;">Medications</ion-card-title>
-        </ion-card-header>
-        <h6 style="text-align:center; font-size: 20px; color: white;"><b>Adderall</b>: Take every 4-6 hours</h6>
-        <h6 style="text-align:center; font-size: 20px; color: white;"><b>Ritalin</b>: Take twice a day before breakfast and lunch</h6>
-      </ion-card>
-  <ion-grid>
-    <ion-row>
-    <ion-col size="6" *ngFor="let photo of photoService.photos">
-        <img [src]="photo.data"/>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+      <ion-img style="display:none; text-align:center; height: 300px; width: 200px;" src="assets/AstroChip.png" id="avatarChip"></ion-img>
+      <ion-img style="display:none; text-align:center; height: 300px; width: 200px;" src="assets/AstroAnn.png" id="avatarAnn"></ion-img>
+      <ion-img style="display:none; text-align:center; height: 300px; width: 200px;" src="assets/AstroAndy.png" id="avatarAndy"></ion-img>
+      <ion-img style="display:none; text-align:center; height: 300px; width: 200px;" src="assets/AstroOrange.png" id="avatarOrange"></ion-img>
+      <ion-card-header>
+        <ion-card-title style="text-align:center; color: white;">{{this.restapi.userData.UserName}}</ion-card-title>
+      </ion-card-header>
+    </ion-card>
 
-  <ion-fab vertical="bottom" horizontal="center" slot="fixed"style="bottom:120px;">
-    <ion-fab-button (click)="photoService.takePicture()">
-      <ion-icon name="camera"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
+    <ion-card>
+      <h6 style="text-align:center; font-size: 20px; color: white;"><b>Name</b>: {{this.restapi.userData.FirstName}}
+        {{this.restapi.userData.LastName}}
+      </h6>
+    </ion-card>
 
-  <!-- <ion-fab vertical="bottom" horizontal="left" slot="fixed"style="bottom:20px; left:-1px">
+    <ion-card>
+      <h6 style="text-align:center; font-size: 20px; color: white;"><b>Personal Information</b></h6>
+        <h6 style=" color: white;"><b>Birthdate</b>: {{dob}}</h6>
+        <h6 style=" color: white;"><b>Height</b>: {{feet}} {{inches}}</h6>
+        <h6 style=" color: white;"><b>Weight</b>: {{weight}}</h6>
+    </ion-card>
+
+    <ion-card>
+      <h6 style="text-align:center; font-size: 20px; color: white;"><b>Medication</b></h6>
+        <h6 style="color: white;"><b>Medication</b>: {{medication}}</h6>
+        <h6 style=" color: white;"><b>Dosage (mg)</b>: {{dosage}}</h6>
+        <h6 style=" color: white;"><b>Frequency (days)</b>: {{frequency}}</h6>
+    </ion-card>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col size="6" *ngFor="let photo of photoService.photos">
+          <img [src]="photo.data" />
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-fab vertical="bottom" horizontal="center" slot="fixed" style="bottom:120px;">
+      <ion-fab-button (click)="photoService.takePicture()">
+        <ion-icon name="camera"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+
+    <!-- <ion-fab vertical="bottom" horizontal="left" slot="fixed"style="bottom:20px; left:-1px">
     <ion-fab-button (click)="goGame()">
       <ion-icon name="arrow-back"></ion-icon>
     </ion-fab-button>
   </ion-fab> -->
-</div>
-<!-- end of profile div -->
+  </div>
+  <!-- end of profile div -->
 </ion-content>
